@@ -89,6 +89,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   addressField.addEventListener('input', updateState);
   updateState();
+  // Local submission counter (per browser)
+  const counterId = 'airdrop-counter';
+  function ensureCounter() {
+    let counter = document.getElementById(counterId);
+    if (!counter) {
+      counter = document.createElement('p');
+      counter.id = counterId;
+      counter.style.marginTop = '8px';
+      counter.style.color = '#cccccc';
+      const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+      if (submitBtn) {
+        submitBtn.insertAdjacentElement('afterend', counter);
+      } else if (messageEl) {
+        messageEl.insertAdjacentElement('afterend', counter);
+      } else {
+        form.appendChild(counter);
+      }
+    }
+    return counter;
+  }
+  function getSubmissionCount() {
+    try {
+      const list = JSON.parse(localStorage.getItem('submittedAddresses') || '[]');
+      return Array.isArray(list) ? list.length : 0;
+    } catch {
+      return 0;
+    }
+  }
+  function renderCounter() {
+    const counter = ensureCounter();
+    const num = getSubmissionCount();
+    counter.textContent = `Liczba zgłoszeń (lokalnie): ${num}`;
+  }
+  renderCounter();
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -104,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     markSubmitted(address);
+    renderCounter();
     setMessage(successMessages[currentLang] || successMessages.en, '#00a8b5');
     form.reset();
     updateState();
