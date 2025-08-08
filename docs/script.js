@@ -1,17 +1,8 @@
-/*
- * Client-side behaviour for the Noktra Airdrop page
- * - Language switching (EN/PL)
- * - One-submission-per-address using localStorage
- *   • Live validation blocks duplicate address
- *   • Persists both in a list and per-address key for robustness
- */
+/* Noktra Airdrop behaviour (PL only) */
 
-let currentLang = 'en';
 
-function setLanguage(lang) {
-  currentLang = lang;
-  document.querySelectorAll('[data-en]').forEach((el) => {
-    const translation = el.getAttribute(`data-${lang}`);
+
+function setLanguage() {}`);
     if (translation) {
       el.textContent = translation;
     }
@@ -28,18 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  const successMessages = {
-    en: 'Thank you for submitting! Stay tuned for the airdrop.',
-    pl: 'Dziękujemy za zgłoszenie! Oczekuj na airdrop.'
-  };
-  const duplicateMessages = {
-    en: 'This address has already claimed the airdrop.',
-    pl: 'Ten adres już odebrał airdrop.'
-  };
-  const emptyMessages = {
-    en: 'Please enter a Solana address.',
-    pl: 'Wprowadź adres Solana.'
-  };
+  const successMessage = "Zgłoszenie przyjęte. Dziękujemy!";
+  const duplicateMessage = "Ten adres już złożył zgłoszenie.";
+  const emptyMessage = "Wprowadź adres Solana.";
 
   const normalize = (v) => (v || '').trim().toLowerCase();
   const keyFor = (addr) => `airdrop_submitted:${addr}`;
@@ -78,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dup = address && hasSubmitted(address);
     if (submitBtn) submitBtn.disabled = !!dup;
     if (dup) {
-      setMessage(duplicateMessages[currentLang] || duplicateMessages.en, '#ff0000');
+      setMessage(duplicateMessage, '#ff0000');
     } else if (
       messageEl.textContent === duplicateMessages.en ||
       messageEl.textContent === duplicateMessages.pl
@@ -129,17 +111,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const address = normalize(addressField.value);
 
     if (!address) {
-      setMessage(emptyMessages[currentLang] || emptyMessages.en, '#ff0000');
+      setMessage(emptyMessage, '#ff0000');
       return;
     }
     if (hasSubmitted(address)) {
-      setMessage(duplicateMessages[currentLang] || duplicateMessages.en, '#ff0000');
+      setMessage(duplicateMessage, '#ff0000');
       return;
     }
 
     markSubmitted(address);
     renderCounter();
-    setMessage(successMessages[currentLang] || successMessages.en, '#00a8b5');
+    setMessage(successMessage, '#00a8b5');
     form.reset();
     updateState();
   });
