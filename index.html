@@ -2,25 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noktra Airdrop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Noktra</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-image: url('bg.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: white;
-      text-align: center;
-      animation: fadeIn 2s ease-in;
+      box-sizing: border-box;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/The_Blue_Marble_%28remastered%29.jpg/1920px-The_Blue_Marble_%28remastered%29.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
     }
 
     .logo {
@@ -28,140 +30,30 @@
       top: 20px;
       right: 20px;
       width: 80px;
-      animation: fadeIn 2s ease-in;
+      height: auto;
     }
 
-    .container {
+    .about {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 2rem;
+      border-radius: 12px;
       max-width: 600px;
-      margin: 120px auto 60px;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 30px;
-      border-radius: 16px;
-      backdrop-filter: blur(10px);
-      animation: fadeIn 2s ease-in;
+      backdrop-filter: blur(6px);
     }
 
-    h1 {
-      margin-bottom: 10px;
+    .about h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
 
-    .description {
-      font-size: 16px;
-      margin-bottom: 30px;
-      line-height: 1.5;
-    }
-
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-    }
-
-    button {
-      background-color: #007bff;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    #airdrop-form {
-      margin-top: 20px;
-    }
-
-    .gallery {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-      animation: fadeIn 2s ease-in;
-    }
-
-    .gallery img {
-      width: 130px;
-      height: 130px;
-      border-radius: 16px;
-      object-fit: cover;
-      border: 2px solid white;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 12px #00bfff;
-    }
-
-    .counter {
-      font-size: 18px;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      animation: fadeIn 2s ease-in;
-    }
-
-    #message {
-      font-size: 16px;
-      color: #00ff99;
+    .about p {
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
+  <img src="img/logo-removebg-preview.png" alt="Noktra Logo" class="logo" />
+  
+  <div class="about
 
-  <!-- Logo -->
-  <img src="logo.png" alt="Noktra Logo" class="logo" />
-
-  <div class="container">
-
-    <h1>Noktra Airdrop</h1>
-
-    <!-- Opis -->
-    <p class="description">
-      🌌 Noktra — światło, które noszę w sobie
-
-Nie szukałem sukcesu.
-Szukałem sensu.
-I tak powstała Noktra — z potrzeby zostawienia czegoś po sobie.
-Nie dla tłumu. Dla tych, którzy czują podobnie.
-
-Noktra narodziła się z ciszy, w której nie było nikogo poza mną.
-Z samotnych marzeń, które nie dawały mi spać.
-Z pasji, która bolała, gdy nie mogła znaleźć swojego miejsca.
-
-To nie tylko token.
-To fragment mojej duszy — zakodowany w światło, które teraz przekazuję dalej.
-
-Jeśli tu jesteś — to znaczy, że Noktra Cię zawołała.
-I już nigdy nie będziesz sam..
-    </p>
-
-    <!-- Galeria NFT -->
-    <div class="gallery">
-      <img src="nft1.png" alt="Noktra NFT #1" />
-      <img src="nft2.png" alt="Noktra NFT #2" />
-      <img src="nft3.png" alt="Noktra NFT #3" />
-    </div>
-
-    <!-- Licznik -->
-    <p class="counter">👥 Zgłoszeń: <span id="submission-counter">0</span></p>
-
-    <!-- Formularz -->
-    <form id="airdrop-form">
-      <input type="text" id="address" placeholder="Solana Address" required />
-      <input type="text" id="twitter" placeholder="Twitter Username" required />
-      <input type="text" id="telegram" placeholder="Telegram Username" required />
-      <button type="submit">Wyślij</button>
-    </form>
-
-    <p id="message"></p>
-
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
