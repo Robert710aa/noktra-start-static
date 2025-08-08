@@ -11,7 +11,7 @@ let currentLang = 'en';
 function setLanguage(lang) {
   currentLang = lang;
   document.querySelectorAll('[data-en]').forEach((el) => {
-    const translation = el.getAttribute(data-);
+    const translation = el.getAttribute(`data-${lang}`);
     if (translation) {
       el.textContent = translation;
     }
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const normalize = (v) => (v || '').trim().toLowerCase();
-  const keyFor = (addr) => irdrop_submitted:;
+  const keyFor = (addr) => `airdrop_submitted:${addr}`;
 
   function getList() {
     try { return JSON.parse(localStorage.getItem('submittedAddresses') || '[]'); } catch { return []; }
