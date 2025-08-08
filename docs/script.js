@@ -1,93 +1,111 @@
 /*
  * Client-side behaviour for the Noktra Airdrop page
- *
- * This script handles language switching between English and Polish and
- * provides basic feedback when the airdrop form is submitted. It
- * leverages data attributes on elements to swap the displayed text
- * depending on the chosen language.
+ * - Language switching (EN/PL)
+ * - One-submission-per-address using localStorage
+ *   • Live validation blocks duplicate address
+ *   • Persists both in a list and per-address key for robustness
  */
 
-/* Keep track of the current language; default is English */
 let currentLang = 'en';
 
-/**
- * Switch the displayed language of all elements that define
- * translations via data attributes. Elements must declare both
- * 'data-en' and 'data-pl' attributes in order to be updated.
- *
- * @param {string} lang - A short language code ('en' or 'pl').
- */
 function setLanguage(lang) {
   currentLang = lang;
   document.querySelectorAll('[data-en]').forEach((el) => {
-    const translation = el.getAttribute(`data-${lang}`);
+    const translation = el.getAttribute(data-);
     if (translation) {
       el.textContent = translation;
     }
   });
 }
 
-/**
- * Initialise event listeners once the DOM is fully loaded.
- */
 document.addEventListener('DOMContentLoaded', () => {
-  // Attach form submission handler
   const form = document.getElementById('airdrop-form');
   const messageEl = document.getElementById('message');
+  const addressField = document.getElementById('address');
+  const submitBtn = form ? form.querySelector('button[type="submit"], input[type="submit"]') : null;
+
+  if (!form || !messageEl || !addressField) {
+    return;
+  }
+
+  const successMessages = {
+    en: 'Thank you for submitting! Stay tuned for the airdrop.',
+    pl: 'Dziękujemy za zgłoszenie! Oczekuj na airdrop.'
+  };
+  const duplicateMessages = {
+    en: 'This address has already claimed the airdrop.',
+    pl: 'Ten adres już odebrał airdrop.'
+  };
+  const emptyMessages = {
+    en: 'Please enter a Solana address.',
+    pl: 'Wprowadź adres Solana.'
+  };
+
+  const normalize = (v) => (v || '').trim().toLowerCase();
+  const keyFor = (addr) => irdrop_submitted:;
+
+  function getList() {
+    try { return JSON.parse(localStorage.getItem('submittedAddresses') || '[]'); } catch { return []; }
+  }
+  function setList(list) {
+    try { localStorage.setItem('submittedAddresses', JSON.stringify(list)); } catch {}
+  }
+  function hasSubmitted(addr) {
+    try {
+      if (localStorage.getItem(keyFor(addr))) return true;
+      const list = getList();
+      return list.includes(addr);
+    } catch {
+      return false;
+    }
+  }
+  function markSubmitted(addr) {
+    try {
+      localStorage.setItem(keyFor(addr), String(Date.now()));
+      const list = getList();
+      if (!list.includes(addr)) {
+        list.push(addr);
+        setList(list);
+      }
+    } catch {}
+  }
+  function setMessage(text, color) {
+    messageEl.textContent = text || '';
+    if (color) messageEl.style.color = color;
+  }
+  function updateState() {
+    const address = normalize(addressField.value);
+    const dup = address && hasSubmitted(address);
+    if (submitBtn) submitBtn.disabled = !!dup;
+    if (dup) {
+      setMessage(duplicateMessages[currentLang] || duplicateMessages.en, '#ff0000');
+    } else if (
+      messageEl.textContent === duplicateMessages.en ||
+      messageEl.textContent === duplicateMessages.pl
+    ) {
+      setMessage('', '');
+    }
+  }
+
+  addressField.addEventListener('input', updateState);
+  updateState();
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    const address = normalize(addressField.value);
 
-    // Provide localized feedback messages. This does not actually submit
-    // data to a server. Two categories are defined: success when a new
-    // address is submitted and error messages for duplicate or empty
-    // submissions.
-    const successMessages = {
-      en: 'Thank you for submitting! Stay tuned for the airdrop.',
-      pl: 'Dziękujemy za zgłoszenie! Oczekuj na airdrop.'
-    };
-    const duplicateMessages = {
-      en: 'This address has already claimed the airdrop.',
-      pl: 'Ten adres już odebrał airdrop.'
-    };
-    const emptyMessages = {
-      en: 'Please enter a Solana address.',
-      pl: 'Wprowadź adres Solana.'
-    };
-
-    // Read the address input and normalise it to lower case. The
-    // address field may be missing; handle that safely.
-    const addressField = document.getElementById('address');
-    const address = addressField ? addressField.value.trim().toLowerCase() : '';
-
-    // Retrieve the list of previously submitted addresses from localStorage.
-    const storedAddresses = JSON.parse(localStorage.getItem('submittedAddresses') || '[]');
-
-    // If no address was provided, inform the user and do nothing.
     if (!address) {
-      messageEl.style.color = '#ff0000';
-      messageEl.textContent = emptyMessages[currentLang] || emptyMessages.en;
+      setMessage(emptyMessages[currentLang] || emptyMessages.en, '#ff0000');
+      return;
+    }
+    if (hasSubmitted(address)) {
+      setMessage(duplicateMessages[currentLang] || duplicateMessages.en, '#ff0000');
       return;
     }
 
-    // If the address has already been submitted, show an error and stop.
-    if (storedAddresses.includes(address)) {
-      messageEl.style.color = '#ff0000';
-      messageEl.textContent = duplicateMessages[currentLang] || duplicateMessages.en;
-      return;
-    }
-
-    // At this point we have a non-empty address that hasn’t been seen
-    // before. Persist it to localStorage so subsequent submissions will
-    // recognise it as a duplicate. Then provide success feedback.
-    storedAddresses.push(address);
-    localStorage.setItem('submittedAddresses', JSON.stringify(storedAddresses));
-
-    messageEl.style.color = '#00a8b5';
-    messageEl.textContent = successMessages[currentLang] || successMessages.en;
-
-    // Reset the form fields only after persisting the address. This clears
-    // the inputs but the saved address remains in localStorage. The user
-    // must enter a new address for the next submission.
+    markSubmitted(address);
+    setMessage(successMessages[currentLang] || successMessages.en, '#00a8b5');
     form.reset();
+    updateState();
   });
 });
