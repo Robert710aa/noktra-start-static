@@ -1,4 +1,4 @@
-/* Noktra Airdrop Styles - Version 19 */
+/* Noktra Airdrop Styles - Version 20 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
 
 * {
@@ -320,11 +320,11 @@ button[type="submit"]:hover {
   margin: 0 10px;
   transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
 }
 
 .nft-strip .nft-card:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 20px rgba(0, 255, 204, 0.6));
+  transform: scale(1.05);
   z-index: 10;
 }
 
@@ -333,10 +333,12 @@ button[type="submit"]:hover {
   height: auto;
   border-radius: 15px;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .nft-strip .nft-card:hover img {
-  filter: brightness(1.1) contrast(1.1);
+  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
+  filter: brightness(1.05);
 }
 
 /* Better headings and description */
