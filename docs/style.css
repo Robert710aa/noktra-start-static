@@ -221,3 +221,7 @@ button[type="submit"]:hover {
 /* Hide horizontal scrollbar visually */
 .nft-strip{scrollbar-width:none}
 .nft-strip::-webkit-scrollbar{display:none}
+
+.mission-text{max-width:960px;margin:8px auto 16px;padding:0 12px;text-align:center;color:#eafcff;font-size:1.05rem;line-height:1.65;letter-spacing:.2px}
+.mission-text{background:linear-gradient(90deg,#eaffff,#d7fff7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mission-text{filter:drop-shadow(0 0 10px rgba(0,255,238,0.08))}
