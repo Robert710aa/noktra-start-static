@@ -233,3 +233,6 @@ button[type="submit"]:hover {
 #airdrop-form button{margin-top:6px;padding:0.6rem}
 @media (min-width:520px){#airdrop-form{grid-template-columns:1fr 1fr}#airdrop-form #address{grid-column:1 / -1}#airdrop-form button{grid-column:1 / -1}}
 .mission-text{font-size:1.12rem;line-height:1.7}
+
+/* Mission text enlarge */
+.mission-text{font-size:1.25rem;line-height:1.8;margin:12px auto 20px}
