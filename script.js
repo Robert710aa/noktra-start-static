@@ -1,4 +1,4 @@
-/* Noktra Airdrop Script - Version 7 */
+/* Noktra Airdrop Script - Version 9 */
 /* Updated for GitHub Pages compatibility */
 
 /* Noktra Airdrop behaviour (PL only) */

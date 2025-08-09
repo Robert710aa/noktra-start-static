@@ -3,70 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noktra Test Page</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-      color: white;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-    }
-    .test-box {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px 0;
-      border: 2px solid #00ffcc;
-    }
-    .status {
-      color: #00ffcc;
-      font-weight: bold;
-    }
-    .error {
-      color: #ff4444;
-      font-weight: bold;
-    }
-  </style>
+  <meta name="description" content="Noktra Airdrop - Join the Noktra ecosystem and register for the token airdrop">
+  <meta name="keywords" content="Noktra, Airdrop, Solana, NFT, Cryptocurrency">
+  <meta name="author" content="Noktra Team">
+  <meta property="og:title" content="Noktra Airdrop">
+  <meta property="og:description" content="Join the Noktra ecosystem and register for the token airdrop">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://robert710aa.github.io/noktra-start-static/">
+  <meta name="theme-color" content="#00ffcc">
+  <title>Noktra Airdrop</title>
+  <link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
-  <h1>🚀 Noktra Test Page</h1>
-  
-  <div class="test-box">
-    <h2>Status Test</h2>
-    <p class="status">✅ Jeśli widzisz niebieskie gradientowe tło - CSS działa poprawnie!</p>
-    <p class="error">❌ Jeśli widzisz tylko czarne tło - problem z CSS</p>
+  <div class="build-badge">BUILD v9</div>
+
+  <!-- Top navigation link to the NFT gallery -->
+  <div class="top-link">
+    <a href="#nft-gallery" data-en="Noktra NFT Gallery" data-pl="Galeria NFT Noktra">Noktra NFT Gallery</a>
   </div>
-  
-  <div class="test-box">
-    <h2>Informacje techniczne</h2>
-    <p><strong>Wersja:</strong> v8 (test)</p>
-    <p><strong>Czas:</strong> <span id="time"></span></p>
-    <p><strong>URL:</strong> <span id="url"></span></p>
+
+  <!-- Watermark background logo -->
+  <div class="background"></div>
+
+  <!-- Corner logo overlay -->
+  <img src="logo.png" alt="Noktra Logo" class="corner-logo" onerror="this.style.display='none'">
+
+  <!-- NFT Gallery Section -->
+  <div id="nft-gallery" class="nft-gallery">
+    <h2>Noktra Genesis Collection</h2>
+    <div class="nft-strip">
+      <div class="nft-card">
+        <img src="https://arweave.net/gzH8e-VV2jwQ2x5DGVdHTrkqEYkYEdK99BbsYWeqPcg" alt="NFT 2" onerror="this.style.display='none'">
+        <p>Noktra Genesis #2</p>
+      </div>
+      <div class="nft-card">
+        <img src="D3897B39-FBCA-41A6-9BC2-C88AF6DD2B6B.png" alt="Noktra NFT 3" onerror="this.style.display='none'">
+        <p>Noktra Genesis #3</p>
+      </div>
+      <div class="nft-card">
+        <img src="E7A36217-5496-4C3A-9439-87C9278E6F24.png" alt="Noktra NFT 4" onerror="this.style.display='none'">
+        <p>Noktra Genesis #4</p>
+      </div>
+      <div class="nft-card">
+        <img src="889DE7B5-6899-4172-A704-6EC2F9E3114A.png" alt="Noktra NFT 5" onerror="this.style.display='none'">
+        <p>Noktra Genesis #5</p>
+      </div>
+    </div>
   </div>
-  
-  <div class="test-box">
-    <h2>Test JavaScript</h2>
-    <p>Kliknij przycisk, aby przetestować JavaScript:</p>
-    <button onclick="testJS()" style="background: #00ffcc; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Test JavaScript</button>
-    <p id="js-result"></p>
+
+  <!-- Mission text -->
+  <p class="mission-text">Noktra is my personal dream, now becoming reality. Thank you for being a part of it. Born out of passion, faith, and the need to create something truly my own — Noktra is not a project, it's a feeling. It's the beginning of a journey that will take her to a place where the whole world will hear her name.</p>
+
+  <div class="container">
+    <div class="warning-banner">
+      No trading / no liquidity — do not buy on DEX. Official launch will be announced here.
+    </div>
+
+    <h1 class="gradient-title" data-en="Noktra Airdrop" data-pl="Airdrop Noktra">Noktra Airdrop</h1>
+
+    <div class="token-info">
+      <p><strong data-en="Token" data-pl="Token">Token</strong>: NOK</p>
+      <p><strong data-en="Total Supply" data-pl="Podaż">Total Supply</strong>: 1,000,000,000</p>
+      <p><strong data-en="Network" data-pl="Sieć">Network</strong>: Solana</p>
+      <p><strong>Token Address:</strong> <a href="https://solscan.io/token/48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1TbL" target="_blank" rel="noopener noreferrer">Solscan</a>
+      <button id="copy-token" class="copy-btn" type="button" data-address="48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1TbL">Copy</button></p>
+    </div>
+
+    <!-- Countdown placeholder -->
+    <p id="counter" style="text-align:center; font-weight:bold; margin-top:1rem; color:#00ffcc;"></p>
+
+    <!-- Airdrop registration form -->
+    <form id="airdrop-form" novalidate>
+      <input type="text" id="address" name="address" placeholder="Solana Address" required>
+      <input type="text" id="twitter" name="twitter" placeholder="Twitter Username" required>
+      <input type="text" id="telegram" name="telegram" placeholder="Telegram Username" required>
+      <button type="submit" data-en="Submit to Airdrop" data-pl="Zgłoś się do airdropu">Submit to Airdrop</button>
+    </form>
+    <p id="message"></p>
+
+    <div class="socials">
+      <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer">Phantom Wallet</a> |
+      <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a> |
+      <a href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
+    </div>
   </div>
-  
-  <script>
-    // Test JavaScript
-    function testJS() {
-      document.getElementById('js-result').innerHTML = '✅ JavaScript działa poprawnie!';
-      document.getElementById('js-result').style.color = '#00ffcc';
-    }
-    
-    // Wyświetl aktualny czas
-    document.getElementById('time').textContent = new Date().toLocaleString('pl-PL');
-    
-    // Wyświetl URL
-    document.getElementById('url').textContent = window.location.href;
-    
-    console.log('Noktra Test Page loaded successfully');
-  </script>
+
+  <!-- Script handling language switching and form submission -->
+  <script src="script.js?v=9"></script>
 </body>
 </html>
