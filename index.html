@@ -12,59 +12,50 @@
   <meta property="og:url" content="https://robert710aa.github.io/noktra-start-static/">
   <meta name="theme-color" content="#00ffcc">
   <title>Noktra Airdrop</title>
-  <link rel="stylesheet" href="style.css?v=28">
+  <link rel="stylesheet" href="style.css?v=30">
 </head>
 <body>
 
-  <!-- Animated Background -->
-  <div class="animated-background">
-    <div class="floating-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-      <div class="shape shape-4"></div>
-    </div>
-  </div>
-
-  <!-- Top navigation link to the NFT gallery -->
-  <div class="top-link">
-    <a href="#nft-gallery" data-en="Noktra NFT Gallery" data-pl="Galeria NFT Noktra">Noktra NFT Gallery</a>
-  </div>
-
-  <!-- Language switcher -->
-  <div class="language-switcher">
-    <button onclick="setLanguage('en')">EN</button>
-    <button onclick="setLanguage('pl')">PL</button>
-  </div>
-
-  <!-- Dark Mode Toggle -->
-  <div class="theme-toggle">
-    <button id="themeToggle" onclick="toggleTheme()">
-      <span class="theme-icon">🌙</span>
-      <span class="theme-text" data-en="Dark Mode" data-pl="Tryb Ciemny">Dark Mode</span>
-    </button>
-  </div>
-
-  <!-- NFT Gallery Section -->
-  <div id="nft-gallery" class="nft-gallery">
-    <h2 data-en="Noktra Genesis Collection" data-pl="Kolekcja Genesis Noktra">Noktra Genesis Collection</h2>
-    <div class="nft-strip">
-      <div class="nft-card" title="Noktra Token #1" data-en="Noktra Token #1" data-pl="Token Noktra #1">
-        <img src="889DE7F5-6899-4172-A704-6EC2F9E3114A.png" alt="Noktra Token 1" onerror="handleImageError(this)">
-      </div>
-      <div class="nft-card" title="Noktra Token #2" data-en="Noktra Token #2" data-pl="Token Noktra #2">
-        <img src="D3897B39-FBCA-41A6-9BC2-C88AF6DD2B6B.png" alt="Noktra Token 2" onerror="handleImageError(this)">
-      </div>
-      <div class="nft-card" title="Noktra Token #3" data-en="Noktra Token #3" data-pl="Token Noktra #3">
-        <img src="E7A36217-5496-4C3A-9439-87C9278E6F24.png" alt="Noktra Token 3" onerror="handleImageError(this)">
-      </div>
-    </div>
-  </div>
-
-  <!-- Mission text -->
-  <p class="mission-text" data-en="Noktra is my personal dream, now becoming reality. Thank you for being a part of it. Born out of passion, faith, and the need to create something truly my own — Noktra is not a project, it's a feeling. It's the beginning of a journey that will take her to a place where the whole world will hear her name." data-pl="Noktra to moje osobiste marzenie, które staje się rzeczywistością. Dziękuję, że jesteś tego częścią. Zrodzona z pasji, wiary i potrzeby stworzenia czegoś naprawdę mojego — Noktra to nie projekt, to uczucie. To początek podróży, która zaprowadzi ją do miejsca, gdzie cały świat usłyszy jej imię.">Noktra is my personal dream, now becoming reality. Thank you for being a part of it. Born out of passion, faith, and the need to create something truly my own — Noktra is not a project, it's a feeling. It's the beginning of a journey that will take her to a place where the whole world will hear her name.</p>
+  <!-- DEBUG: Tymczasowo usunięte animated-background -->
 
   <div class="container">
+    <!-- Top navigation link to the NFT gallery -->
+    <div class="top-link">
+      <a href="#nft-gallery" data-en="Noktra NFT Gallery" data-pl="Galeria NFT Noktra">Noktra NFT Gallery</a>
+    </div>
+
+    <!-- Language switcher -->
+    <div class="language-switcher">
+      <button onclick="setLanguage('en')">EN</button>
+      <button onclick="setLanguage('pl')">PL</button>
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle">
+      <button id="themeToggle" onclick="toggleTheme()">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-text" data-en="Dark Mode" data-pl="Tryb Ciemny">Dark Mode</span>
+      </button>
+    </div>
+
+    <!-- NFT Gallery Section -->
+    <div id="nft-gallery" class="nft-gallery">
+      <h2 data-en="Noktra Genesis Collection" data-pl="Kolekcja Genesis Noktra">Noktra Genesis Collection</h2>
+      <div class="nft-strip">
+        <div class="nft-card" title="Noktra Token #1" data-en="Noktra Token #1" data-pl="Token Noktra #1">
+          <img src="889DE7F5-6899-4172-A704-6EC2F9E3114A.png" alt="Noktra Token 1" onerror="handleImageError(this)">
+        </div>
+        <div class="nft-card" title="Noktra Token #2" data-en="Noktra Token #2" data-pl="Token Noktra #2">
+          <img src="D3897B39-FBCA-41A6-9BC2-C88AF6DD2B6B.png" alt="Noktra Token 2" onerror="handleImageError(this)">
+        </div>
+        <div class="nft-card" title="Noktra Token #3" data-en="Noktra Token #3" data-pl="Token Noktra #3">
+          <img src="E7A36217-5496-4C3A-9439-87C9278E6F24.png" alt="Noktra Token 3" onerror="handleImageError(this)">
+        </div>
+      </div>
+    </div>
+
+    <!-- Mission text -->
+    <p class="mission-text" data-en="Noktra is my personal dream, now becoming reality. Thank you for being a part of it. Born out of passion, faith, and the need to create something truly my own — Noktra is not a project, it's a feeling. It's the beginning of a journey that will take her to a place where the whole world will hear her name." data-pl="Noktra to moje osobiste marzenie, które staje się rzeczywistością. Dziękuję, że jesteś tego częścią. Zrodzona z pasji, wiary i potrzeby stworzenia czegoś naprawdę mojego — Noktra to nie projekt, to uczucie. To początek podróży, która zaprowadzi ją do miejsca, gdzie cały świat usłyszy jej imię.">Noktra is my personal dream, now becoming reality. Thank you for being a part of it. Born out of passion, faith, and the need to create something truly my own — Noktra is not a project, it's a feeling. It's the beginning of a journey that will take her to a place where the whole world will hear her name.</p>
 
     <header>
       <div class="logo">
@@ -127,6 +118,6 @@
   </div>
 
   <!-- Script handling language switching and form submission -->
-  <script src="script.js?v=28"></script>
+  <script src="script.js?v=30"></script>
 </body>
 </html>
