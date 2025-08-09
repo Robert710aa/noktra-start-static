@@ -236,3 +236,4 @@ button[type="submit"]:hover {
 
 /* Mission text enlarge */
 .mission-text{font-size:1.25rem;line-height:1.8;margin:12px auto 20px}
+\r\n/* override */\r\n.nft-strip img{height:84px}\r\n
