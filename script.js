@@ -1,5 +1,5 @@
-/* Noktra Airdrop Script - Version 9 */
-/* Updated for GitHub Pages compatibility */
+/* Noktra Airdrop Script - Version 10 */
+/* Fixed background, positioning, and NFT display issues */
 
 /* Noktra Airdrop behaviour (PL only) */
 
