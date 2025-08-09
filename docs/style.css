@@ -1,450 +1,659 @@
-/* Noktra Airdrop Styles - Version 26 */
+/* Noktra Airdrop Styles - Version 27 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
+/* Added entrance animations and gradient button styles */
 
-* {
-  box-sizing: border-box;
+/* Entrance Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  min-height: 100vh;
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* Main background - simplified and working */
-body {
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%) !important;
-  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa') !important;
-  background-repeat: no-repeat !important;
-  background-position: center center !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* Remove conflicting .background class */
-.background {
-  display: none;
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.corner-logo {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  width: 60px;
-  height: auto;
-  z-index: 10;
+/* Apply animations to elements */
+header {
+  animation: fadeInUp 0.8s ease-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
-.language-switcher {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 10;
-}
-
-.language-switcher button {
-  margin-left: 0.5rem;
-  padding: 0.3rem 0.7rem;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.container {
-  padding: 2rem;
-  max-width: 336px;
-  margin: 120px auto;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  border-radius: 1rem;
-  box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
-}
-
-.description {
-  font-size: 1rem;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.token-info {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-input {
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: none;
-}
-
-button[type="submit"] {
-  padding: 0.7rem;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: #00d084;
-  color: white;
+.visit-counter {
+  background: linear-gradient(135deg, #00ffcc, #00ccff);
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 20px;
   font-weight: bold;
-  cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  animation: fadeInRight 0.8s ease-out 0.1s both;
 }
 
-button[type="submit"]:hover {
-  background-color: #00a86b;
+.visit-counter span:first-child {
+  margin-right: 8px;
+}
+
+.mission-text {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.nft-gallery {
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.nft-strip {
+  animation: fadeInScale 0.8s ease-out 0.6s both;
+}
+
+.airdrop-form {
+  animation: fadeInUp 0.8s ease-out 0.8s both;
 }
 
 .socials {
-  margin-top: 1.5rem;
+  animation: fadeInUp 0.8s ease-out 1s both;
+}
+
+/* Gradient Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, #00ffcc 0%, #00ccff 50%, #00ffcc 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4);
+  background-position: right center;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Enhanced NFT Hover Effects */
+.nft-strip .nft-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.nft-strip .nft-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
+  z-index: 10;
+}
+
+/* Custom Tooltip Styles */
+.nft-strip .nft-card::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #00ffcc, #00ccff);
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+}
+
+.nft-strip .nft-card:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* Language-specific tooltip content */
+.nft-strip .nft-card[data-pl]::after {
+  content: attr(data-pl);
+}
+
+/* Show English tooltip for English language */
+body[data-lang="en"] .nft-strip .nft-card[data-en]::after {
+  content: attr(data-en);
+}
+
+/* Social Media Icons */
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.socials a:hover {
+  color: #00ffcc;
+  transform: translateY(-2px);
+}
+
+.socials a::before {
+  font-size: 16px;
+  width: 20px;
   text-align: center;
+}
+
+.socials a[href*="phantom"]::before {
+  content: "👛";
+}
+
+.socials a[href*="x.com"]::before {
+  content: "🐦";
+}
+
+.socials a[href*="t.me"]::before {
+  content: "📱";
+}
+
+/* Copy Notification */
+.copy-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #00ffcc, #00ccff);
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  font-weight: bold;
+}
+
+.copy-notification.show {
+  transform: translateX(0);
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced Form Styling */
+.airdrop-form input,
+.airdrop-form textarea {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.airdrop-form input:focus,
+.airdrop-form textarea:focus {
+  border-color: #00ffcc;
+  box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Form Button Styling */
+.airdrop-form button[type="submit"] {
+  background: linear-gradient(135deg, #00ffcc 0%, #00ccff 50%, #00ffcc 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+}
+
+.airdrop-form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4);
+  background-position: right center;
+}
+
+.airdrop-form button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  max-width: 200px;
+  height: auto;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.5));
+}
+
+.gradient-title {
+  background: linear-gradient(135deg, #00ffcc, #00ccff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+}
+
+.mission-text {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #cccccc;
+  line-height: 1.6;
+}
+
+.nft-gallery {
+  margin-bottom: 40px;
+}
+
+.nft-gallery h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #00ffcc;
+}
+
+.nft-strip {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #00ffcc #1a1a2e;
+}
+
+.nft-strip::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nft-strip::-webkit-scrollbar-track {
+  background: #1a1a2e;
+  border-radius: 4px;
+}
+
+.nft-strip::-webkit-scrollbar-thumb {
+  background: #00ffcc;
+  border-radius: 4px;
+}
+
+.nft-strip::-webkit-scrollbar-thumb:hover {
+  background: #00ccff;
+}
+
+.nft-card {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.nft-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.3));
+}
+
+.airdrop-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.airdrop-form h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #00ffcc;
+  font-size: 2rem;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #cccccc;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #00ffcc;
+  box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.token-info {
+  background: rgba(0, 255, 204, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0, 255, 204, 0.3);
+}
+
+.token-info h3 {
+  color: #00ffcc;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.token-address {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 12px;
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.copy-btn {
+  background: #00ffcc;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.copy-btn:hover {
+  background: #00ccff;
+  transform: translateY(-2px);
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #00ffcc, #00ccff);
+  color: #000;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 204, 0.3);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.message {
+  text-align: center;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.message.success {
+  background: rgba(0, 255, 0, 0.1);
+  color: #00ff00;
+  border: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+.message.error {
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.socials {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .socials a {
   color: #00ffcc;
   text-decoration: none;
-  margin: 0 0.5rem;
+  margin: 0 10px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .socials a:hover {
-  text-decoration: underline;
+  color: #00ccff;
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
 }
 
-/* NFT Gallery Section */
-.nft-gallery {
-  padding: 2rem;
+.language-switcher {
   text-align: center;
-  color: white;
-  margin-top: 2rem;
+  margin-bottom: 20px;
 }
 
-.nft-gallery h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  color: #00ffcc;
+.language-switcher button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* NFT styles moved to .nft-strip section below */
-
-.top-link {
-  position: fixed;
-  top: 3rem; /* Moved down to avoid build badge overlap */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.85rem;
-  z-index: 20;
+.language-switcher button:hover {
+  background: rgba(0, 255, 204, 0.2);
+  border-color: #00ffcc;
 }
 
-.top-link a {
-  text-decoration: none;
-  color: #00ffee;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.3s ease;
+.language-switcher button.active {
+  background: #00ffcc;
+  color: #000;
+  border-color: #00ffcc;
 }
 
-.top-link a:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Enhanced responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
   .container {
-    margin: 4rem 1rem;
-    padding: 1rem;
-    max-width: 100%;
+    padding: 15px;
   }
-  /* NFT styles handled by .nft-strip */
-  .corner-logo {
-    width: 50px;
+  
+  .gradient-title {
+    font-size: 2rem;
   }
-  .top-link a {
-    font-size: 0.75rem;
-    padding: 0.3rem 0.6rem;
+  
+  .nft-strip {
+    gap: 15px;
+    padding: 0 10px;
   }
-  .language-switcher button {
-    font-size: 0.8rem;
-    padding: 0.2rem 0.5rem;
+  
+  .nft-card img {
+    width: 120px;
+    height: 120px;
   }
-  .nft-gallery {
-    padding: 1rem;
+  
+  .airdrop-form {
+    padding: 20px;
   }
-  .nft-gallery h2 {
-    font-size: 1.5rem;
+  
+  .token-address {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .copy-btn {
+    align-self: center;
   }
 }
 
 @media (max-width: 480px) {
-  .container {
-    margin: 2rem 0.5rem;
-    padding: 0.8rem;
+  .gradient-title {
+    font-size: 1.5rem;
   }
-  /* NFT styles handled by .nft-strip */
-  .top-link {
-    top: 2.5rem;
+  
+  .nft-strip {
+    flex-direction: column;
+    align-items: center;
   }
-  .corner-logo {
-    width: 40px;
-    top: 0.5rem;
-    right: 0.5rem;
+  
+  .nft-card {
+    width: 100%;
+    max-width: 200px;
   }
-}
-
-/* Animacja logo */
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.9; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.corner-logo {
-  animation: pulse 4s infinite;
-}
-
-/* Efekt przycisku */
-button[type="submit"]:hover {
-  background-color: #00a86b;
-  transform: scale(1.03);
-  transition: all 0.3s ease;
-}
-
-/* NFT effects handled by .nft-strip section below */
-
-.copy-btn {
-  margin-left: 8px;
-  padding: 0.3rem 0.6rem;
-  border: 0;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.8);
-  color: #000;
-  cursor: pointer;
-}
-
-.faq, .roadmap {
-  max-width: 720px;
-  margin: 2rem auto;
-  padding: 1rem;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  box-shadow: 0 0 12px rgba(0, 255, 204, 0.3);
-}
-
-.faq h2, .roadmap h2 {
-  margin-top: 0;
-}
-
-.faq-item {
-  margin: 0.6rem 0;
-}
-
-.faq-q {
-  width: 100%;
-  text-align: left;
-  background: #111;
-  color: #fff;
-  border: 1px solid #222;
-  padding: 0.6rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.faq-a {
-  display: none;
-  padding: 0.6rem 0.6rem 0;
-  color: #ddd;
-}
-
-.timeline {
-  list-style: none;
-  padding: 0;
-}
-
-.timeline li {
-  margin: 0.4rem 0;
-}
-
-.timeline li span {
-  display: inline-block;
-  min-width: 90px;
-  font-weight: 700;
-  color: #00ffcc;
-}
-
-.back-to-top {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  padding: 0.5rem 0.7rem;
-  border-radius: 8px;
-  border: 0;
-  background: #00a8b5;
-  color: #fff;
-  cursor: pointer;
-  display: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.back-to-top.show {
-  display: block;
-}
-
-/* NFT horizontal strip - FIXED for 3 cards */
-.nft-strip {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding: 10px 12px;
-  margin: 12px auto;
-  max-width: 700px; /* Increased for 3 cards without cropping */
-  justify-content: center; /* Center the 3 cards */
-  scrollbar-width: none; /* Hide scrollbar */
-}
-
-.nft-strip::-webkit-scrollbar {
-  display: none; /* Hide scrollbar in WebKit browsers */
-}
-
-.nft-strip .nft-card {
-  flex: 0 0 auto;
-  margin: 0 10px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  min-width: 150px; /* Ensure minimum width */
-  max-width: 200px; /* Ensure maximum width */
-}
-
-.nft-strip .nft-card:hover {
-  transform: scale(1.05);
-  z-index: 10;
-  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
-}
-
-.nft-strip .nft-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 15px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  display: block; /* Ensure image is displayed */
-}
-
-.nft-strip .nft-card:hover img {
-  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
-  filter: brightness(1.05);
-}
-
-
-
-/* Better headings and description */
-.gradient-title {
-  background: linear-gradient(90deg, #00ffee, #00a8b5);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 8px rgba(0, 255, 238, 0.15);
-}
-
-.description.fancy-text {
-  font-size: 1.05rem;
-  line-height: 1.55;
-  letter-spacing: 0.2px;
-  text-shadow: 0 0 10px rgba(0, 255, 238, 0.08);
-}
-
-
-
-.mission-text {
-  max-width: 960px;
-  margin: 12px auto 20px;
-  padding: 0 12px;
-  text-align: center;
-  color: #eafcff;
-  font-size: 1.25rem;
-  line-height: 1.8;
-  background: linear-gradient(90deg, #eaffff, #d7fff7);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 10px rgba(0, 255, 238, 0.08));
-}
-
-/* Compact form layout and enhanced visuals */
-#airdrop-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-}
-
-#airdrop-form input {
-  margin: 0;
-  padding: 0.45rem;
-}
-
-#airdrop-form button {
-  margin-top: 6px;
-  padding: 0.6rem;
-}
-
-@media (min-width: 520px) {
-  #airdrop-form {
-    grid-template-columns: 1fr 1fr;
+  
+  .socials a {
+    display: block;
+    margin: 10px 0;
   }
-  #airdrop-form #address {
-    grid-column: 1 / -1;
-  }
-  #airdrop-form button {
-    grid-column: 1 / -1;
-  }
-}
-
-
-
-/* Loading states and error handling */
-.loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.error {
-  border-color: #ff6b6b !important;
-  box-shadow: 0 0 5px rgba(255, 107, 107, 0.3) !important;
-}
-
-/* Smooth scrolling for anchor links */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Focus states for accessibility */
-button:focus,
-input:focus,
-a:focus {
-  outline: 2px solid #00ffcc;
-  outline-offset: 2px;
 }
 
 /* Print styles */
 @media print {
-  .background,
-  .corner-logo,
-  .top-link {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+  
+  .airdrop-form,
+  .socials,
+  .language-switcher {
     display: none;
   }
   
-  .container,
-  .nft-gallery {
-    background: white !important;
-    color: black !important;
-    box-shadow: none !important;
+  .gradient-title {
+    background: none;
+    -webkit-text-fill-color: black;
+    color: black;
   }
+}
+
+/* Focus states for accessibility */
+.form-group input:focus,
+.form-group textarea:focus,
+.copy-btn:focus,
+.submit-btn:focus,
+.language-switcher button:focus {
+  outline: 2px solid #00ffcc;
+  outline-offset: 2px;
+}
+
+/* Error states */
+.form-group input.error,
+.form-group textarea.error {
+  border-color: #ff6b6b !important;
+  box-shadow: 0 0 5px rgba(255, 107, 107, 0.3) !important;
 }

@@ -1,5 +1,266 @@
-/* Noktra Airdrop Styles - Version 26 */
+/* Noktra Airdrop Styles - Version 27 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
+/* Added entrance animations and gradient button styles */
+
+/* Entrance Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Apply animations to elements */
+header {
+  animation: fadeInUp 0.8s ease-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.visit-counter {
+  background: linear-gradient(135deg, #00ffcc, #00ccff);
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  animation: fadeInRight 0.8s ease-out 0.1s both;
+}
+
+.visit-counter span:first-child {
+  margin-right: 8px;
+}
+
+.mission-text {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.nft-gallery {
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.nft-strip {
+  animation: fadeInScale 0.8s ease-out 0.6s both;
+}
+
+.airdrop-form {
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+}
+
+.socials {
+  animation: fadeInUp 0.8s ease-out 1s both;
+}
+
+/* Gradient Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, #00ffcc 0%, #00ccff 50%, #00ffcc 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4);
+  background-position: right center;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Enhanced NFT Hover Effects */
+.nft-strip .nft-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.nft-strip .nft-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
+  z-index: 10;
+}
+
+/* Custom Tooltip Styles */
+.nft-strip .nft-card::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #00ffcc, #00ccff);
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+}
+
+.nft-strip .nft-card:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* Language-specific tooltip content */
+.nft-strip .nft-card[data-pl]::after {
+  content: attr(data-pl);
+}
+
+/* Show English tooltip for English language */
+body[data-lang="en"] .nft-strip .nft-card[data-en]::after {
+  content: attr(data-en);
+}
+
+/* Social Media Icons */
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.socials a:hover {
+  color: #00ffcc;
+  transform: translateY(-2px);
+}
+
+.socials a::before {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.socials a[href*="phantom"]::before {
+  content: "👛";
+}
+
+.socials a[href*="x.com"]::before {
+  content: "🐦";
+}
+
+.socials a[href*="t.me"]::before {
+  content: "📱";
+}
+
+/* Copy Notification */
+.copy-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #00ffcc, #00ccff);
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  font-weight: bold;
+}
+
+.copy-notification.show {
+  transform: translateX(0);
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced Form Styling */
+.airdrop-form input,
+.airdrop-form textarea {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.airdrop-form input:focus,
+.airdrop-form textarea:focus {
+  border-color: #00ffcc;
+  box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Form Button Styling */
+.airdrop-form button[type="submit"] {
+  background: linear-gradient(135deg, #00ffcc 0%, #00ccff 50%, #00ffcc 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+}
+
+.airdrop-form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4);
+  background-position: right center;
+}
+
+.airdrop-form button[type="submit"]:active {
+  transform: translateY(0);
+}
 
 * {
   box-sizing: border-box;
@@ -420,11 +681,6 @@ button[type="submit"]:hover {
 .error {
   border-color: #ff6b6b !important;
   box-shadow: 0 0 5px rgba(255, 107, 107, 0.3) !important;
-}
-
-/* Smooth scrolling for anchor links */
-html {
-  scroll-behavior: smooth;
 }
 
 /* Focus states for accessibility */

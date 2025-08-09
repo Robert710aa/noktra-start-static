@@ -1,5 +1,6 @@
-/* Noktra Airdrop Script - Version 26 */
+/* Noktra Airdrop Script - Version 27 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
+/* Added copy notification and enhanced functionality */
 
 /* Noktra Airdrop behaviour (PL only) */
 
@@ -33,7 +34,88 @@ function handleImageError(img) {
   }
 }
 
+// Copy notification functionality
+function showCopyNotification() {
+  const notification = document.getElementById('copyNotification');
+  if (notification) {
+    notification.classList.add('show');
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, 3000);
+  }
+}
+
+// Enhanced copy to clipboard function
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showCopyNotification();
+    console.log('Address copied successfully');
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+    // Fallback for older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    showCopyNotification();
+  }
+}
+
+// Visit counter functionality
+function updateVisitCounter() {
+  let visits = localStorage.getItem('noktraVisits') || 0;
+  visits = parseInt(visits) + 1;
+  localStorage.setItem('noktraVisits', visits);
+  
+  const counterElement = document.getElementById('visitCounter');
+  if (counterElement) {
+    counterElement.textContent = visits;
+  }
+}
+
+// Confetti effect function
+function createConfetti() {
+  const colors = ['#00ffcc', '#00ccff', '#ff6b6b', '#ffd93d', '#6bcf7f'];
+  const confettiCount = 100;
+  
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.position = 'fixed';
+    confetti.style.width = '10px';
+    confetti.style.height = '10px';
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.top = '-10px';
+    confetti.style.pointerEvents = 'none';
+    confetti.style.zIndex = '9999';
+    confetti.style.borderRadius = '50%';
+    
+    document.body.appendChild(confetti);
+    
+    const animation = confetti.animate([
+      { transform: 'translateY(0px) rotate(0deg)', opacity: 1 },
+      { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+    ], {
+      duration: Math.random() * 3000 + 2000,
+      easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    });
+    
+    animation.onfinish = () => {
+      document.body.removeChild(confetti);
+    };
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Set initial language
+  setLanguage('pl');
+  
+  // Update visit counter
+  updateVisitCounter();
+  
   // Handle image loading errors
   const images = document.querySelectorAll('img');
   images.forEach(img => {
@@ -156,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setMessage(successMessage, '#00a8b5');
     form.reset();
     updateState();
+    createConfetti(); // Trigger confetti effect on successful submission
   });
 
   // Copy token address functionality
@@ -163,22 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
       const address = copyBtn.getAttribute('data-address');
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(address).then(() => {
-          const originalText = copyBtn.textContent;
-          copyBtn.textContent = 'Copied!';
-          setTimeout(() => {
-            copyBtn.textContent = originalText;
-          }, 2000);
-        }).catch(err => {
-          console.warn('Failed to copy to clipboard:', err);
-          // Fallback for clipboard API failure
-          fallbackCopy(address);
-        });
-      } else {
-        // Fallback for older browsers
-        fallbackCopy(address);
-      }
+      copyToClipboard(address);
     });
   }
 
