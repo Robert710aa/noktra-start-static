@@ -237,3 +237,4 @@ button[type="submit"]:hover {
 /* Mission text enlarge */
 .mission-text{font-size:1.25rem;line-height:1.8;margin:12px auto 20px}
 \r\n/* override */\r\n.nft-strip img{height:84px}\r\n
+\r\n.build-badge{position:fixed;top:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.65);border:1px solid #00ffee33;color:#00ffee;padding:4px 8px;border-radius:6px;font:600 12px/1.2 'Segoe UI',Arial,sans-serif;z-index:1000}\r\n
