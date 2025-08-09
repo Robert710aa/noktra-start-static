@@ -1,4 +1,4 @@
-/* Noktra Airdrop Styles - Version 22 */
+/* Noktra Airdrop Styles - Version 23 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
 
 * {
@@ -301,74 +301,51 @@ button[type="submit"]:hover {
 
 /* NFT horizontal strip - FIXED for 3 cards */
 .nft-strip {
-  display: flex !important;
-  gap: 12px !important;
-  overflow-x: auto !important;
-  padding: 10px 12px !important;
-  margin: 12px auto !important;
-  max-width: 600px !important; /* Fixed for 3 cards */
-  justify-content: center !important; /* Center the 3 cards */
-  scrollbar-width: none !important; /* Hide scrollbar */
-  border: 5px solid red !important; /* DEBUG: Make strip very visible */
-  background: rgba(255, 0, 0, 0.3) !important; /* DEBUG: Make strip background very visible */
-  min-height: 200px !important; /* DEBUG: Ensure minimum height */
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px 12px;
+  margin: 12px auto;
+  max-width: 600px; /* Fixed for 3 cards */
+  justify-content: center; /* Center the 3 cards */
+  scrollbar-width: none; /* Hide scrollbar */
 }
 
 .nft-strip::-webkit-scrollbar {
-  display: none !important; /* Hide scrollbar in WebKit browsers */
+  display: none; /* Hide scrollbar in WebKit browsers */
 }
 
 .nft-strip .nft-card {
-  flex: 0 0 auto !important;
-  margin: 0 10px !important;
-  transition: all 0.3s ease !important;
-  cursor: pointer !important;
-  position: relative !important;
-  border: 5px solid blue !important; /* DEBUG: Make cards very visible */
-  background: rgba(0, 0, 255, 0.3) !important; /* DEBUG: Make card background very visible */
-  min-width: 150px !important; /* Ensure minimum width */
-  max-width: 200px !important; /* Ensure maximum width */
-  min-height: 150px !important; /* DEBUG: Ensure minimum height */
-  padding: 10px !important; /* DEBUG: Add padding */
+  flex: 0 0 auto;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  min-width: 150px; /* Ensure minimum width */
+  max-width: 200px; /* Ensure maximum width */
 }
 
 .nft-strip .nft-card:hover {
-  transform: scale(1.05) !important;
-  z-index: 10 !important;
-  border-color: yellow !important; /* DEBUG: Make hover very visible */
-  background: rgba(255, 255, 0, 0.3) !important; /* DEBUG: Make hover background visible */
+  transform: scale(1.05);
+  z-index: 10;
+  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
 }
 
 .nft-strip .nft-card img {
-  width: 100% !important;
-  height: auto !important;
-  border-radius: 15px !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-  border: 5px solid green !important; /* DEBUG: Make images very visible */
-  display: block !important; /* Ensure image is displayed */
-  max-width: 100% !important; /* DEBUG: Ensure image fits */
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  display: block; /* Ensure image is displayed */
 }
 
 .nft-strip .nft-card:hover img {
-  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4) !important;
-  filter: brightness(1.05) !important;
-  border-color: orange !important; /* DEBUG: Make hover very visible */
+  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
+  filter: brightness(1.05);
 }
 
-/* DEBUG: Make NFT gallery section very visible */
-.nft-gallery {
-  border: 5px solid purple !important;
-  background: rgba(128, 0, 128, 0.2) !important;
-  padding: 20px !important;
-  margin: 20px 0 !important;
-}
 
-.nft-gallery h2 {
-  border: 3px solid pink !important;
-  background: rgba(255, 192, 203, 0.3) !important;
-  padding: 10px !important;
-}
 
 /* Better headings and description */
 .gradient-title {
