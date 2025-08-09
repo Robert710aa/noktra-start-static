@@ -1,5 +1,5 @@
-/* Noktra Airdrop Script - Version 12 */
-/* Fixed background conflicts and simplified background CSS */
+/* Noktra Airdrop Script - Version 13 */
+/* Fixed NFT display - all 3 NFTs should now be visible */
 
 /* Noktra Airdrop behaviour (PL only) */
 
@@ -212,4 +212,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Console log for debugging
   console.log('Noktra Airdrop script loaded successfully');
+  
+  // Debug NFT images
+  const nftImages = document.querySelectorAll('.nft-card img');
+  nftImages.forEach((img, index) => {
+    console.log(`NFT ${index + 1}:`, img.src);
+    img.addEventListener('load', () => {
+      console.log(`NFT ${index + 1} loaded successfully`);
+    });
+    img.addEventListener('error', () => {
+      console.error(`NFT ${index + 1} failed to load:`, img.src);
+    });
+  });
 });
