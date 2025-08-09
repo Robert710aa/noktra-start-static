@@ -1,35 +1,22 @@
-/* Noktra Airdrop - Main Stylesheet v37 */
-
-/* ULTRA AGRESYWNE DEBUGOWANIE - FORCE VISIBILITY */
+/* Noktra Airdrop - Main Stylesheet v38 */
 body {
-  background: #ff0000 !important; /* Czerwone tło całej strony */
-  min-height: 100vh !important;
-  position: relative !important;
-  z-index: 1 !important;
+  background: var(--bg-color);
+  min-height: 100vh;
 }
 
 .container {
-  background: #00ff00 !important; /* Zielone tło kontenera */
-  border: 10px solid #0000ff !important; /* Niebieska ramka */
-  min-height: 100vh !important;
-  position: relative !important;
-  z-index: 100 !important;
-  margin: 20px auto !important; /* Zmniejszony margin */
-  padding: 2rem !important;
-  overflow: visible !important;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  min-height: 100vh;
+  position: relative;
+  z-index: 100;
+  margin: 120px auto;
+  padding: 2rem;
+  overflow: visible;
 }
 
 .container > * {
-  margin: 1rem 0 !important;
-  background: #ffff00 !important; /* Żółte tło dla wszystkich elementów */
-  border: 5px solid #ff00ff !important; /* Magenta ramka */
-  padding: 20px !important;
-  min-height: 50px !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  z-index: 1000 !important;
+  margin: 1rem 0;
 }
 
 .logo {
@@ -50,66 +37,34 @@ body {
 }
 
 .airdrop-form {
-  max-width: 600px !important;
-  margin: 50px auto !important;
-  background: #ff0000 !important; /* Czerwony tło żeby było widoczne */
-  padding: 50px !important;
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--surface-color);
+  padding: 30px;
   border-radius: 20px;
   backdrop-filter: blur(10px);
-  border: 10px solid #00ff00 !important; /* Zielona ramka */
-  min-height: 500px !important; /* Wymuszenie wysokości */
-  position: relative !important;
-  z-index: 99999 !important; /* Bardzo wysoki z-index */
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  overflow: visible !important;
-  transform: none !important;
-  animation: none !important;
+  border: 1px solid var(--border-color);
 }
 
 .form-group {
   margin-bottom: 1.5rem;
-  background: #ffff00 !important; /* Żółte tło */
-  border: 5px solid #ff00ff !important; /* Magenta ramka */
-  padding: 20px !important;
-  min-height: 100px !important;
-  position: relative !important;
-  z-index: 100000 !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 .form-group label {
-  display: block !important;
+  display: block;
   margin-bottom: 0.5rem;
-  color: #000000 !important; /* Czarny tekst */
+  color: var(--text-color);
   font-weight: 500;
-  background: #00ffff !important; /* Cyan tło */
-  border: 3px solid #000000 !important; /* Czarna ramka */
-  padding: 10px !important;
-  font-size: 20px !important;
-  position: relative !important;
-  z-index: 100001 !important;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 .form-group input {
-  width: 100% !important;
-  padding: 20px !important;
-  border: 5px solid #ff8000 !important; /* Pomarańczowa ramka */
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
   border-radius: 10px;
-  background: #ffffff !important; /* Białe tło */
-  color: #000000 !important; /* Czarny tekst */
-  font-size: 18px !important;
-  min-height: 60px !important;
-  position: relative !important;
-  z-index: 100002 !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  background: var(--input-bg);
+  color: var(--text-color);
+  font-size: 16px;
 }
 
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
