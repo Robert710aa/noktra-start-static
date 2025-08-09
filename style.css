@@ -225,3 +225,11 @@ button[type="submit"]:hover {
 .mission-text{max-width:960px;margin:8px auto 16px;padding:0 12px;text-align:center;color:#eafcff;font-size:1.05rem;line-height:1.65;letter-spacing:.2px}
 .mission-text{background:linear-gradient(90deg,#eaffff,#d7fff7);-webkit-background-clip:text;background-clip:text;color:transparent}
 .mission-text{filter:drop-shadow(0 0 10px rgba(0,255,238,0.08))}
+
+/* Compact form layout and enhanced visuals */
+.nft-strip img{height:72px}
+#airdrop-form{display:grid;grid-template-columns:1fr;gap:8px}
+#airdrop-form input{margin:0;padding:0.45rem}
+#airdrop-form button{margin-top:6px;padding:0.6rem}
+@media (min-width:520px){#airdrop-form{grid-template-columns:1fr 1fr}#airdrop-form #address{grid-column:1 / -1}#airdrop-form button{grid-column:1 / -1}}
+.mission-text{font-size:1.12rem;line-height:1.7}
