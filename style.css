@@ -1,5 +1,9 @@
-/* Noktra Airdrop Styles - Version 10 */
-/* Fixed background, positioning, and NFT display issues */
+/* Noktra Airdrop Styles - Version 11 */
+/* Fixed background visibility and NFT display issues */
+
+* {
+  box-sizing: border-box;
+}
 
 body, html {
   margin: 0;
@@ -8,6 +12,15 @@ body, html {
   overflow-x: hidden; /* Prevent horizontal scroll */
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%) !important;
   min-height: 100vh;
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%) !important;
+  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa'), linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%) !important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .background {
@@ -356,25 +369,27 @@ button[type="submit"]:hover {
   display: block;
 }
 
-/* NFT horizontal strip - FIXED */
+/* NFT horizontal strip - FIXED for 3 cards only */
 .nft-strip {
   display: flex;
   gap: 12px;
   overflow-x: auto;
   padding: 10px 12px;
   margin: 12px auto;
-  max-width: 960px;
+  max-width: 600px; /* Reduced for 3 cards */
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 255, 238, 0.2);
   border-radius: 10px;
   backdrop-filter: blur(4px);
+  justify-content: center; /* Center the 3 cards */
 }
 
 .nft-strip .nft-card {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(0, 255, 238, 0.3);
-  min-width: 140px;
+  min-width: 160px; /* Fixed width for 3 cards */
   flex-shrink: 0;
+  margin: 0 5px;
 }
 
 .nft-strip img {
