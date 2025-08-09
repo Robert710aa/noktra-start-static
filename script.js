@@ -1,5 +1,5 @@
-/* Noktra Airdrop Script - Version 13 */
-/* Fixed NFT display - all 3 NFTs should now be visible */
+/* Noktra Airdrop Script - Version 14 */
+/* Fixed NFT display - removed onerror attributes for debugging */
 
 /* Noktra Airdrop behaviour (PL only) */
 
