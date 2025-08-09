@@ -1,4 +1,4 @@
-/* Noktra Airdrop Styles - Version 18 */
+/* Noktra Airdrop Styles - Version 19 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
 
 * {
@@ -316,23 +316,27 @@ button[type="submit"]:hover {
 }
 
 .nft-strip .nft-card {
-  min-width: 160px; /* Fixed width for 3 cards */
-  flex-shrink: 0;
-  margin: 0 5px;
+  flex: 0 0 auto;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.nft-strip img {
-  height: 84px;
-  width: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  opacity: 0.95;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+.nft-strip .nft-card:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(0, 255, 204, 0.6));
+  z-index: 10;
 }
 
-.nft-strip img:hover {
-  transform: translateY(-2px) scale(1.03);
-  opacity: 1;
+.nft-strip .nft-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.nft-strip .nft-card:hover img {
+  filter: brightness(1.1) contrast(1.1);
 }
 
 /* Better headings and description */
