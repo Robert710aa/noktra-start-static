@@ -1,7 +1,110 @@
 /* Noktra Airdrop - Main Stylesheet v32 */
 
+/* DEBUG: TYMCZASOWE STYLE DEBUGOWANIA - BARDZO AGRESYWNE */
+body {
+  background: #ff0000 !important;
+  min-height: 100vh !important;
+}
 
+.container {
+  background: #00ff00 !important;
+  border: 10px solid #0000ff !important;
+  min-height: 100vh !important;
+  position: relative !important;
+  z-index: 100 !important;
+  margin: 20px auto !important;
+  padding: 20px !important;
+  overflow: visible !important;
+}
 
+/* Wszystkie elementy w kontenerze */
+.container > * {
+  background: #ff00ff !important;
+  border: 5px solid #ffff00 !important;
+  margin: 10px 0 !important;
+  padding: 15px !important;
+  min-height: 50px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+.logo {
+  background: #ffff00 !important;
+  border: 8px solid #ff00ff !important;
+  padding: 30px !important;
+  margin: 30px 0 !important;
+  min-height: 150px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+.logo img {
+  max-width: 400px !important;
+  height: auto !important;
+  border: 5px solid #333333 !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.nft-gallery {
+  background: #00ffff !important;
+  border: 8px solid #ff8000 !important;
+  padding: 30px !important;
+  margin: 30px 0 !important;
+  min-height: 250px !important;
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+.airdrop-form {
+  background: #8000ff !important;
+  border: 8px solid #008000 !important;
+  padding: 30px !important;
+  margin: 30px 0 !important;
+  min-height: 400px !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+/* Dodaję style dla wszystkich elementów formularza */
+.form-group {
+  background: #ff0080 !important;
+  border: 5px solid #00ff80 !important;
+  padding: 20px !important;
+  margin: 15px 0 !important;
+  position: relative !important;
+  z-index: 1001 !important;
+  min-height: 80px !important;
+}
+
+.form-group label {
+  background: #80ff00 !important;
+  color: #000000 !important;
+  display: block !important;
+  margin-bottom: 10px !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.form-group input {
+  background: #ffffff !important;
+  border: 5px solid #000000 !important;
+  padding: 15px !important;
+  width: 100% !important;
+  display: block !important;
+  font-size: 16px !important;
+}
 
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
 /* Added entrance animations, gradient button styles, dark mode, progress bar, and animated background */
@@ -280,9 +383,7 @@ header {
   animation: fadeInScale 0.8s ease-out 0.6s both;
 }
 
-.airdrop-form {
-  animation: fadeInUp 0.8s ease-out 0.8s both;
-}
+/* Usunięto duplikat animacji - zastąpiono agresywnymi stylami debugowania */
 
 .socials {
   animation: fadeInUp 0.8s ease-out 1s both;
@@ -585,13 +686,18 @@ body {
 }
 
 .airdrop-form {
-  max-width: 600px;
-  margin: 0 auto;
-  background: var(--surface-color);
-  padding: 30px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border-color);
+  background: #8000ff !important; /* Purple */
+  border: 8px solid #008000 !important; /* Green border */
+  padding: 30px !important;
+  margin: 30px 0 !important;
+  min-height: 400px !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1000 !important;
 }
 
 .token-info {
