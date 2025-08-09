@@ -1,6 +1,198 @@
-/* Noktra Airdrop Styles - Version 27 */
+/* Noktra Airdrop Styles - Version 28 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
-/* Added entrance animations and gradient button styles */
+/* Added entrance animations, gradient button styles, dark mode, progress bar, and animated background */
+
+/* CSS Variables for theming */
+:root {
+  --primary-color: #00ffcc;
+  --secondary-color: #00ccff;
+  --background-color: #0a0a0a;
+  --surface-color: rgba(255, 255, 255, 0.05);
+  --text-color: #ffffff;
+  --text-secondary: #cccccc;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 255, 204, 0.3);
+}
+
+/* Light theme variables */
+[data-theme="light"] {
+  --background-color: #f5f5f5;
+  --surface-color: rgba(0, 0, 0, 0.05);
+  --text-color: #000000;
+  --text-secondary: #666666;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Animated Background */
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.floating-shapes {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  opacity: 0.1;
+  animation: float 20s infinite linear;
+}
+
+.shape-1 {
+  width: 100px;
+  height: 100px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  width: 150px;
+  height: 150px;
+  top: 60%;
+  right: 20%;
+  animation-delay: -5s;
+}
+
+.shape-3 {
+  width: 80px;
+  height: 80px;
+  bottom: 20%;
+  left: 20%;
+  animation-delay: -10s;
+}
+
+.shape-4 {
+  width: 120px;
+  height: 120px;
+  top: 30%;
+  right: 60%;
+  animation-delay: -15s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(20px) rotate(270deg);
+  }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.theme-toggle button {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+.theme-icon {
+  font-size: 18px;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--surface-color);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  width: 0%;
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.progress-text {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Enhanced Form Styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--surface-color);
+  color: var(--text-color);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--shadow-color);
+  transform: translateY(-2px);
+}
+
+.form-group input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
 
 /* Entrance Animations */
 @keyframes fadeInUp {
@@ -57,13 +249,13 @@ header {
 }
 
 .visit-counter {
-  background: linear-gradient(135deg, #00ffcc, #00ccff);
-  color: #000;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--text-color);
   padding: 8px 16px;
   border-radius: 20px;
   font-weight: bold;
   font-size: 14px;
-  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  box-shadow: 0 4px 15px var(--shadow-color);
   animation: fadeInRight 0.8s ease-out 0.1s both;
 }
 
@@ -91,23 +283,29 @@ header {
   animation: fadeInUp 0.8s ease-out 1s both;
 }
 
+.progress-container {
+  animation: fadeInUp 0.8s ease-out 0.7s both;
+}
+
 /* Gradient Button Styles */
 .btn-primary {
-  background: linear-gradient(135deg, #00ffcc 0%, #00ccff 50%, #00ffcc 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--primary-color) 100%);
   background-size: 200% 200%;
   animation: gradientShift 3s ease infinite;
   border: none;
-  color: #000;
+  color: var(--text-color);
+  padding: 12px 24px;
+  border-radius: 25px;
   font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4);
-  background-position: right center;
+  box-shadow: 0 8px 25px var(--shadow-color);
 }
 
 @keyframes gradientShift {
@@ -116,73 +314,63 @@ header {
   100% { background-position: 0% 50%; }
 }
 
-/* Enhanced NFT Hover Effects */
+/* Enhanced NFT Card Hover Effects */
 .nft-strip .nft-card {
-  transition: all 0.3s ease;
-  cursor: pointer;
   position: relative;
+  overflow: hidden;
 }
 
 .nft-strip .nft-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
-  z-index: 10;
+  box-shadow: 0 20px 40px var(--shadow-color);
 }
 
-/* Custom Tooltip Styles */
 .nft-strip .nft-card::after {
   content: attr(title);
   position: absolute;
-  bottom: -40px;
+  bottom: -50px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #00ffcc, #00ccff);
-  color: #000;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
   padding: 8px 12px;
-  border-radius: 15px;
+  border-radius: 6px;
   font-size: 12px;
-  font-weight: bold;
   white-space: nowrap;
   opacity: 0;
-  visibility: hidden;
   transition: all 0.3s ease;
-  z-index: 100;
-  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  pointer-events: none;
+  z-index: 10;
 }
 
 .nft-strip .nft-card:hover::after {
+  bottom: 10px;
   opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(-5px);
 }
 
-/* Language-specific tooltip content */
+/* Language-specific tooltips */
 .nft-strip .nft-card[data-pl]::after {
   content: attr(data-pl);
 }
 
-/* Show English tooltip for English language */
 body[data-lang="en"] .nft-strip .nft-card[data-en]::after {
   content: attr(data-en);
 }
 
-/* Social Media Icons */
+/* Enhanced Social Links */
 .socials a {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+  position: relative;
   transition: all 0.3s ease;
 }
 
 .socials a:hover {
-  color: #00ffcc;
   transform: translateY(-2px);
+  color: var(--primary-color);
 }
 
 .socials a::before {
-  font-size: 16px;
-  width: 20px;
-  text-align: center;
+  margin-right: 8px;
+  font-size: 18px;
 }
 
 .socials a[href*="phantom"]::before {
@@ -200,86 +388,96 @@ body[data-lang="en"] .nft-strip .nft-card[data-en]::after {
 /* Copy Notification */
 .copy-notification {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  background: linear-gradient(135deg, #00ffcc, #00ccff);
-  color: #000;
-  padding: 12px 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--text-color);
+  padding: 15px 25px;
   border-radius: 25px;
-  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
-  transform: translateX(400px);
-  transition: transform 0.3s ease;
-  z-index: 1000;
   font-weight: bold;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
 }
 
 .copy-notification.show {
-  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
-/* Smooth Scroll */
+/* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Enhanced Form Styling */
-.airdrop-form input,
-.airdrop-form textarea {
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-
+/* Enhanced Form Input Focus */
 .airdrop-form input:focus,
 .airdrop-form textarea:focus {
-  border-color: #00ffcc;
-  box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.1);
-  transform: translateY(-1px);
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--shadow-color);
+  transform: translateY(-2px);
 }
 
-/* Form Button Styling */
+/* Enhanced Submit Button */
 .airdrop-form button[type="submit"] {
-  background: linear-gradient(135deg, #00ffcc 0%, #00ccff 50%, #00ffcc 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--primary-color) 100%);
   background-size: 200% 200%;
   animation: gradientShift 3s ease infinite;
   border: none;
-  color: #000;
-  font-weight: bold;
+  color: var(--text-color);
   padding: 15px 30px;
   border-radius: 25px;
+  font-weight: bold;
+  font-size: 16px;
   cursor: pointer;
+  width: 100%;
   transition: all 0.3s ease;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 .airdrop-form button[type="submit"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4);
-  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--shadow-color);
 }
 
 .airdrop-form button[type="submit"]:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
 }
 
+/* Base Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+body, html {
+  height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-  color: #ffffff;
-  min-height: 100vh;
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+body {
+  line-height: 1.6;
   overflow-x: hidden;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 120px auto;
+  background: var(--surface-color);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 40px var(--shadow-color);
 }
 
 .logo {
@@ -290,11 +488,11 @@ body {
 .logo img {
   max-width: 200px;
   height: auto;
-  filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.5));
+  filter: drop-shadow(0 0 10px var(--shadow-color));
 }
 
 .gradient-title {
-  background: linear-gradient(135deg, #00ffcc, #00ccff);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -302,14 +500,14 @@ body {
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 20px;
-  text-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+  text-shadow: 0 0 20px var(--shadow-color);
 }
 
 .mission-text {
   text-align: center;
   font-size: 1.2rem;
   margin-bottom: 40px;
-  color: #cccccc;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -321,7 +519,7 @@ body {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #00ffcc;
+  color: var(--primary-color);
 }
 
 .nft-strip {
@@ -332,7 +530,7 @@ body {
   margin: 0 auto;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: #00ffcc #1a1a2e;
+  scrollbar-color: var(--primary-color) var(--background-color);
 }
 
 .nft-strip::-webkit-scrollbar {
@@ -340,17 +538,17 @@ body {
 }
 
 .nft-strip::-webkit-scrollbar-track {
-  background: #1a1a2e;
+  background: var(--background-color);
   border-radius: 4px;
 }
 
 .nft-strip::-webkit-scrollbar-thumb {
-  background: #00ffcc;
+  background: var(--primary-color);
   border-radius: 4px;
 }
 
 .nft-strip::-webkit-scrollbar-thumb:hover {
-  background: #00ccff;
+  background: var(--secondary-color);
 }
 
 .nft-card {
@@ -358,9 +556,9 @@ body {
   text-align: center;
   padding: 15px;
   border-radius: 15px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--surface-color);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
@@ -370,159 +568,74 @@ body {
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 10px;
-  filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.3));
+  filter: drop-shadow(0 0 10px var(--shadow-color));
 }
 
 .airdrop-form {
   max-width: 600px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--surface-color);
   padding: 30px;
   border-radius: 20px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.airdrop-form h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #00ffcc;
-  font-size: 2rem;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #cccccc;
-  font-weight: 500;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
-  font-size: 16px;
-  transition: all 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #00ffcc;
-  box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.1);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 100px;
+  border: 1px solid var(--border-color);
 }
 
 .token-info {
-  background: rgba(0, 255, 204, 0.1);
+  background: var(--surface-color);
   padding: 20px;
   border-radius: 15px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(0, 255, 204, 0.3);
+  margin-bottom: 30px;
+  border: 1px solid var(--border-color);
 }
 
-.token-info h3 {
-  color: #00ffcc;
-  margin-bottom: 15px;
-  font-size: 1.3rem;
+.token-info p {
+  margin-bottom: 10px;
+  color: var(--text-color);
 }
 
-.token-address {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 12px;
-  border-radius: 10px;
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  word-break: break-all;
+.token-info strong {
+  color: var(--primary-color);
+}
+
+.token-info a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.token-info a:hover {
+  text-decoration: underline;
 }
 
 .copy-btn {
-  background: #00ffcc;
-  color: #000;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   border: none;
+  color: var(--text-color);
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
+  margin-left: 10px;
   transition: all 0.3s ease;
-  flex-shrink: 0;
 }
 
 .copy-btn:hover {
-  background: #00ccff;
   transform: translateY(-2px);
-}
-
-.submit-btn {
-  width: 100%;
-  background: linear-gradient(135deg, #00ffcc, #00ccff);
-  color: #000;
-  border: none;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 204, 0.3);
-}
-
-.submit-btn:active {
-  transform: translateY(0);
-}
-
-.message {
-  text-align: center;
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 10px;
-  font-weight: 500;
-}
-
-.message.success {
-  background: rgba(0, 255, 0, 0.1);
-  color: #00ff00;
-  border: 1px solid rgba(0, 255, 0, 0.3);
-}
-
-.message.error {
-  background: rgba(255, 0, 0, 0.1);
-  color: #ff6b6b;
-  border: 1px solid rgba(255, 0, 0, 0.3);
+  box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 .socials {
+  margin-top: 30px;
   text-align: center;
-  margin-top: 40px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--surface-color);
   border-radius: 15px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .socials a {
-  color: #00ffcc;
+  color: var(--primary-color);
   text-decoration: none;
   margin: 0 10px;
   font-weight: 500;
@@ -530,50 +643,80 @@ body {
 }
 
 .socials a:hover {
-  color: #00ccff;
-  text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+  color: var(--secondary-color);
+  transform: translateY(-2px);
 }
 
 .language-switcher {
-  text-align: center;
-  margin-bottom: 20px;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
 }
 
 .language-switcher button {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-left: 0.5rem;
   padding: 8px 16px;
-  margin: 0 5px;
+  font-size: 14px;
+  border: none;
   border-radius: 20px;
   cursor: pointer;
+  background: var(--surface-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
 .language-switcher button:hover {
-  background: rgba(0, 255, 204, 0.2);
-  border-color: #00ffcc;
+  background: var(--primary-color);
+  color: var(--text-color);
+  transform: translateY(-2px);
 }
 
 .language-switcher button.active {
-  background: #00ffcc;
-  color: #000;
-  border-color: #00ffcc;
+  background: var(--primary-color);
+  color: var(--text-color);
+}
+
+.top-link {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.top-link a {
+  background: var(--surface-color);
+  color: var(--primary-color);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.top-link a:hover {
+  background: var(--primary-color);
+  color: var(--text-color);
+  transform: translateY(-2px);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
-    padding: 15px;
+    margin: 80px auto;
+    padding: 1.5rem;
   }
   
   .gradient-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   
   .nft-strip {
+    max-width: 100%;
     gap: 15px;
-    padding: 0 10px;
   }
   
   .nft-card img {
@@ -585,38 +728,76 @@ body {
     padding: 20px;
   }
   
-  .token-address {
-    flex-direction: column;
-    align-items: stretch;
+  .token-info {
+    padding: 15px;
   }
   
   .copy-btn {
-    align-self: center;
+    margin-left: 5px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .theme-toggle {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .theme-toggle button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  
+  .language-switcher {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+  
+  .language-switcher button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .top-link {
+    top: 0.5rem;
+  }
+  
+  .top-link a {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
   .gradient-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   
   .nft-strip {
-    flex-direction: column;
-    align-items: center;
+    gap: 10px;
   }
   
   .nft-card {
-    width: 100%;
-    max-width: 200px;
+    padding: 10px;
+  }
+  
+  .nft-card img {
+    width: 100px;
+    height: 100px;
   }
   
   .socials a {
     display: block;
     margin: 10px 0;
   }
+  
+  .container {
+    margin: 60px auto;
+    padding: 1rem;
+  }
 }
 
-/* Print styles */
+/* Print Styles */
 @media print {
   body {
     background: white;
@@ -624,36 +805,37 @@ body {
   }
   
   .container {
-    max-width: none;
-    padding: 0;
-  }
-  
-  .airdrop-form,
-  .socials,
-  .language-switcher {
-    display: none;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: none;
   }
   
   .gradient-title {
-    background: none;
-    -webkit-text-fill-color: black;
     color: black;
+    -webkit-text-fill-color: black;
+  }
+  
+  .theme-toggle,
+  .language-switcher,
+  .top-link,
+  .progress-container,
+  .copy-notification {
+    display: none;
   }
 }
 
-/* Focus states for accessibility */
+/* Focus Styles for Accessibility */
 .form-group input:focus,
-.form-group textarea:focus,
-.copy-btn:focus,
-.submit-btn:focus,
-.language-switcher button:focus {
-  outline: 2px solid #00ffcc;
+.airdrop-form input:focus,
+.airdrop-form textarea:focus,
+button:focus,
+a:focus {
+  outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
-/* Error states */
-.form-group input.error,
-.form-group textarea.error {
-  border-color: #ff6b6b !important;
-  box-shadow: 0 0 5px rgba(255, 107, 107, 0.3) !important;
+/* Error States */
+.form-group input.error {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
 }

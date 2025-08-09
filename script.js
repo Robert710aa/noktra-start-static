@@ -1,6 +1,6 @@
-/* Noktra Airdrop Script - Version 27 */
+/* Noktra Airdrop Script - Version 28 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
-/* Added copy notification and enhanced functionality */
+/* Added copy notification, enhanced functionality, dark mode toggle, and progress bar */
 
 /* Noktra Airdrop behaviour (PL only) */
 
@@ -109,12 +109,81 @@ function createConfetti() {
   }
 }
 
+// Dark mode functionality
+function toggleTheme() {
+  const body = document.body;
+  const currentTheme = body.getAttribute('data-theme');
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  
+  body.setAttribute('data-theme', newTheme);
+  localStorage.setItem('noktraTheme', newTheme);
+  
+  // Update theme toggle button
+  const themeIcon = document.querySelector('.theme-icon');
+  const themeText = document.querySelector('.theme-text');
+  
+  if (themeIcon) {
+    themeIcon.textContent = newTheme === 'light' ? '🌙' : '☀️';
+  }
+  
+  if (themeText) {
+    const lang = body.getAttribute('data-lang') || 'en';
+    const text = newTheme === 'light' ? 
+      (lang === 'pl' ? 'Tryb Ciemny' : 'Dark Mode') : 
+      (lang === 'pl' ? 'Tryb Jasny' : 'Light Mode');
+    themeText.textContent = text;
+  }
+}
+
+// Form progress tracking
+function updateFormProgress() {
+  const inputs = document.querySelectorAll('#airdrop-form input[required]');
+  const progressFill = document.getElementById('progressFill');
+  
+  if (!progressFill) return;
+  
+  let filledCount = 0;
+  inputs.forEach(input => {
+    if (input.value.trim() !== '') {
+      filledCount++;
+    }
+  });
+  
+  const progress = (filledCount / inputs.length) * 100;
+  progressFill.style.width = progress + '%';
+}
+
+// Initialize theme from localStorage
+function initializeTheme() {
+  const savedTheme = localStorage.getItem('noktraTheme') || 'dark';
+  document.body.setAttribute('data-theme', savedTheme);
+  
+  // Update theme toggle button
+  const themeIcon = document.querySelector('.theme-icon');
+  const themeText = document.querySelector('.theme-text');
+  
+  if (themeIcon) {
+    themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+  }
+  
+  if (themeText) {
+    const lang = document.body.getAttribute('data-lang') || 'en';
+    const text = savedTheme === 'light' ? 
+      (lang === 'pl' ? 'Tryb Ciemny' : 'Dark Mode') : 
+      (lang === 'pl' ? 'Tryb Jasny' : 'Light Mode');
+    themeText.textContent = text;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Set initial language
   setLanguage('pl');
   
   // Update visit counter
   updateVisitCounter();
+  
+  // Initialize theme and progress bar
+  initializeTheme();
   
   // Handle image loading errors
   const images = document.querySelectorAll('img');
@@ -125,6 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('airdrop-form');
   const messageEl = document.getElementById('message');
   const addressField = document.getElementById('address');
+  const twitterField = document.getElementById('twitter');
+  const telegramField = document.getElementById('telegram');
   const submitBtn = form ? form.querySelector('button[type="submit"], input[type="submit"]') : null;
 
   if (!form || !messageEl || !addressField) {
@@ -182,8 +253,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Add event listeners for form progress tracking
+  addressField.addEventListener('input', updateFormProgress);
+  if (twitterField) twitterField.addEventListener('input', updateFormProgress);
+  if (telegramField) telegramField.addEventListener('input', updateFormProgress);
+  
   addressField.addEventListener('input', updateState);
   updateState();
+  updateFormProgress(); // Initial call to set progress bar width
   
   // Local submission counter (per browser)
   const counterId = 'airdrop-counter';
@@ -294,4 +371,10 @@ document.addEventListener('DOMContentLoaded', () => {
       img.src = 'logo.png';
     });
   });
+
+  // Initialize theme on load
+  initializeTheme();
+  // Update form progress on input
+  form.addEventListener('input', updateFormProgress);
+  updateFormProgress(); // Initial call to set progress bar width
 });

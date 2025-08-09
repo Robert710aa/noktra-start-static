@@ -1,6 +1,6 @@
-/* Noktra Airdrop Script - Version 27 */
+/* Noktra Airdrop Script - Version 28 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
-/* Added copy notification and enhanced functionality */
+/* Added copy notification, enhanced functionality, dark mode toggle, and progress bar */
 
 /* Noktra Airdrop behaviour (PL only) */
 
@@ -109,12 +109,81 @@ function createConfetti() {
   }
 }
 
+// Dark mode functionality
+function toggleTheme() {
+  const body = document.body;
+  const currentTheme = body.getAttribute('data-theme');
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  
+  body.setAttribute('data-theme', newTheme);
+  localStorage.setItem('noktraTheme', newTheme);
+  
+  // Update theme toggle button
+  const themeIcon = document.querySelector('.theme-icon');
+  const themeText = document.querySelector('.theme-text');
+  
+  if (themeIcon) {
+    themeIcon.textContent = newTheme === 'light' ? '🌙' : '☀️';
+  }
+  
+  if (themeText) {
+    const lang = body.getAttribute('data-lang') || 'en';
+    const text = newTheme === 'light' ? 
+      (lang === 'pl' ? 'Tryb Ciemny' : 'Dark Mode') : 
+      (lang === 'pl' ? 'Tryb Jasny' : 'Light Mode');
+    themeText.textContent = text;
+  }
+}
+
+// Form progress tracking
+function updateFormProgress() {
+  const inputs = document.querySelectorAll('#airdrop-form input[required]');
+  const progressFill = document.getElementById('progressFill');
+  
+  if (!progressFill) return;
+  
+  let filledCount = 0;
+  inputs.forEach(input => {
+    if (input.value.trim() !== '') {
+      filledCount++;
+    }
+  });
+  
+  const progress = (filledCount / inputs.length) * 100;
+  progressFill.style.width = progress + '%';
+}
+
+// Initialize theme from localStorage
+function initializeTheme() {
+  const savedTheme = localStorage.getItem('noktraTheme') || 'dark';
+  document.body.setAttribute('data-theme', savedTheme);
+  
+  // Update theme toggle button
+  const themeIcon = document.querySelector('.theme-icon');
+  const themeText = document.querySelector('.theme-text');
+  
+  if (themeIcon) {
+    themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+  }
+  
+  if (themeText) {
+    const lang = document.body.getAttribute('data-lang') || 'en';
+    const text = savedTheme === 'light' ? 
+      (lang === 'pl' ? 'Tryb Ciemny' : 'Dark Mode') : 
+      (lang === 'pl' ? 'Tryb Jasny' : 'Light Mode');
+    themeText.textContent = text;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Set initial language
   setLanguage('pl');
   
   // Update visit counter
   updateVisitCounter();
+  
+  // Initialize theme and progress bar
+  initializeTheme();
   
   // Handle image loading errors
   const images = document.querySelectorAll('img');
@@ -125,6 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('airdrop-form');
   const messageEl = document.getElementById('message');
   const addressField = document.getElementById('address');
+  const twitterField = document.getElementById('twitter');
+  const telegramField = document.getElementById('telegram');
   const submitBtn = form ? form.querySelector('button[type="submit"], input[type="submit"]') : null;
 
   if (!form || !messageEl || !addressField) {
@@ -182,30 +253,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Add event listeners for form progress tracking
+  addressField.addEventListener('input', updateFormProgress);
+  if (twitterField) twitterField.addEventListener('input', updateFormProgress);
+  if (telegramField) telegramField.addEventListener('input', updateFormProgress);
+  
+  addressField.addEventListener('input', updateState);
+  updateState();
+  updateFormProgress(); // Initial call to set progress bar width
+  
+  // Local submission counter (per browser)
+  const counterId = 'airdrop-counter';
   function ensureCounter() {
-    let counter = document.getElementById('airdrop-counter');
+    let counter = document.getElementById(counterId);
     if (!counter) {
-      counter = document.createElement('div');
-      counter.id = 'airdrop-counter';
-      counter.style.cssText = 'text-align: center; margin: 1rem 0; color: #00ffcc; font-size: 0.9rem;';
-      form.parentNode.insertBefore(counter, form.nextSibling);
+      counter = document.createElement('p');
+      counter.id = counterId;
+      counter.style.marginTop = '8px';
+      counter.style.color = '#cccccc';
+      const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+      if (submitBtn) {
+        submitBtn.insertAdjacentElement('afterend', counter);
+      } else if (messageEl) {
+        messageEl.insertAdjacentElement('afterend', counter);
+      } else {
+        form.appendChild(counter);
+      }
     }
     return counter;
   }
-
   function getSubmissionCount() {
     try {
-      return getList().length;
+      const list = JSON.parse(localStorage.getItem('submittedAddresses') || '[]');
+      return Array.isArray(list) ? list.length : 0;
     } catch {
       return 0;
     }
   }
-
   function renderCounter() {
     const counter = ensureCounter();
-    const count = getSubmissionCount();
-    counter.textContent = `Liczba zgłoszeń: ${count}`;
+    const num = getSubmissionCount();
+    counter.textContent = `Liczba zgłoszeń (lokalnie): ${num}`;
   }
+  renderCounter();
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const address = normalize(addressField.value);
+
+    if (!address) {
+      setMessage(emptyMessage, '#ff0000');
+      return;
+    }
+    if (hasSubmitted(address)) {
+      setMessage(duplicateMessage, '#ff0000');
+      return;
+    }
+
+    markSubmitted(address);
+    renderCounter();
+    setMessage(successMessage, '#00a8b5');
+    form.reset();
+    updateState();
+    createConfetti(); // Trigger confetti effect on successful submission
+  });
 
   // Copy token address functionality
   const copyBtn = document.getElementById('copy-token');
@@ -216,55 +327,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Fallback copy function
   function fallbackCopy(text) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-999999px';
-    textArea.style.top = '-999999px';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
     try {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
       document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      const originalText = copyBtn.textContent;
+      copyBtn.textContent = 'Copied!';
+      setTimeout(() => {
+        copyBtn.textContent = originalText;
+      }, 2000);
     } catch (err) {
       console.error('Fallback copy failed:', err);
+      copyBtn.textContent = 'Failed to copy';
+      setTimeout(() => {
+        copyBtn.textContent = 'Copy';
+      }, 2000);
     }
-    document.body.removeChild(textArea);
   }
 
-  // Form submission handling
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const address = normalize(addressField.value);
-    if (!address) {
-      setMessage(emptyMessage, '#ff0000');
-      return;
-    }
-
-    if (hasSubmitted(address)) {
-      setMessage(duplicateMessage, '#ff0000');
-      return;
-    }
-
-    // Simulate form submission
-    setMessage('Przetwarzanie...', '#00ffcc');
-    
-    setTimeout(() => {
-      markSubmitted(address);
-      setMessage(successMessage, '#00ff00');
-      form.reset();
-      updateState();
-      createConfetti(); // Trigger confetti effect on successful submission
-    }, 1000);
+  // Console log for debugging
+  console.log('Noktra Airdrop script loaded successfully');
+  
+  // Debug NFT images
+  const nftImages = document.querySelectorAll('.nft-card img');
+  nftImages.forEach((img, index) => {
+    console.log(`NFT ${index + 1}:`, img.src);
+    img.addEventListener('load', () => {
+      console.log(`NFT ${index + 1} loaded successfully`);
+    });
+    img.addEventListener('error', () => {
+      console.error(`NFT ${index + 1} failed to load:`, img.src);
+      // Use logo.png as fallback for any failed images
+      img.src = 'logo.png';
+    });
   });
 
-  // Real-time validation
-  addressField.addEventListener('input', updateState);
-  addressField.addEventListener('blur', updateState);
-
-  // Initial state
-  updateState();
-  renderCounter();
+  // Initialize theme on load
+  initializeTheme();
+  // Update form progress on input
+  form.addEventListener('input', updateFormProgress);
+  updateFormProgress(); // Initial call to set progress bar width
 });

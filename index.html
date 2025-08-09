@@ -12,10 +12,19 @@
   <meta property="og:url" content="https://robert710aa.github.io/noktra-start-static/">
   <meta name="theme-color" content="#00ffcc">
   <title>Noktra Airdrop</title>
-              <link rel="stylesheet" href="style.css?v=27">
+  <link rel="stylesheet" href="style.css?v=28">
 </head>
 <body>
 
+  <!-- Animated Background -->
+  <div class="animated-background">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+  </div>
 
   <!-- Top navigation link to the NFT gallery -->
   <div class="top-link">
@@ -28,8 +37,13 @@
     <button onclick="setLanguage('pl')">PL</button>
   </div>
 
-  <!-- Corner logo overlay -->
-  <img src="logo.png" alt="Noktra Logo" class="corner-logo">
+  <!-- Dark Mode Toggle -->
+  <div class="theme-toggle">
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span class="theme-icon">🌙</span>
+      <span class="theme-text" data-en="Dark Mode" data-pl="Tryb Ciemny">Dark Mode</span>
+    </button>
+  </div>
 
   <!-- NFT Gallery Section -->
   <div id="nft-gallery" class="nft-gallery">
@@ -52,7 +66,6 @@
 
   <div class="container">
 
-
     <header>
       <div class="logo">
         <img src="logo.png" alt="Noktra Logo" onerror="handleImageError(this)">
@@ -63,7 +76,7 @@
       </div>
     </header>
 
-    <h1 class="gradient-title" data-en="Noktra Airdrop" data-pl="Airdrop Noktra">Noktra Airdrop</h1>
+    <h1 class="gradient-title" data-en="Noktra Airdrop" data-pl="Airdrop Noktra">Airdrop Noktra</h1>
 
     <div class="token-info">
       <p><strong data-en="Token" data-pl="Token">Token</strong>: NOK</p>
@@ -73,28 +86,47 @@
       <button id="copy-token" class="copy-btn" type="button" data-address="48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1bL" data-en="Copy" data-pl="Kopiuj">Copy</button></p>
     </div>
 
-    <div class="copy-notification" id="copyNotification">
-      <span data-en="Address copied!" data-pl="Adres skopiowany!">Address copied!</span>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" data-en="Form Progress" data-pl="Postęp Formularza">Form Progress</div>
     </div>
-
 
     <!-- Airdrop registration form -->
     <form id="airdrop-form" novalidate>
-      <input type="text" id="address" name="address" placeholder="Solana Address" data-en="Solana Address" data-pl="Adres Solana" required>
-      <input type="text" id="twitter" name="twitter" placeholder="Twitter Username" data-en="Twitter Username" data-pl="Nazwa użytkownika Twitter" required>
-      <input type="text" id="telegram" name="telegram" placeholder="Telegram Username" data-en="Telegram Username" data-pl="Nazwa użytkownika Telegram" required>
+      <div class="form-group">
+        <label for="address" data-en="Solana Address" data-pl="Adres Solana">Solana Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter your Solana address" data-en="Enter your Solana address" data-pl="Wprowadź swój adres Solana" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="twitter" data-en="Twitter Username" data-pl="Nazwa użytkownika Twitter">Twitter Username</label>
+        <input type="text" id="twitter" name="twitter" placeholder="Enter your Twitter username" data-en="Enter your Twitter username" data-pl="Wprowadź swoją nazwę użytkownika Twitter" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="telegram" data-en="Telegram Username" data-pl="Nazwa użytkownika Telegram">Telegram Username</label>
+        <input type="text" id="telegram" name="telegram" placeholder="Enter your Telegram username" data-en="Enter your Telegram username" data-pl="Wprowadź swoją nazwę użytkownika Telegram" required>
+      </div>
+      
       <button type="submit" data-en="Submit to Airdrop" data-pl="Zgłoś się do airdropu">Submit to Airdrop</button>
     </form>
     <p id="message"></p>
 
-                  <div class="socials">
-                <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer" data-en="Phantom Wallet" data-pl="Portfel Phantom">Phantom Wallet</a> |
-                <a href="https://x.com/Noktra1755" target="_blank" rel="noopener noreferrer" data-en="Twitter" data-pl="Twitter">Twitter</a> |
-                <a href="https://t.me/Noktra_AirDrop" target="_blank" rel="noopener noreferrer" data-en="Telegram" data-pl="Telegram">Telegram</a>
-              </div>
+    <div class="copy-notification" id="copyNotification">
+      <span data-en="Address copied!" data-pl="Adres skopiowany!">Address copied!</span>
+    </div>
+
+    <div class="socials">
+      <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer" data-en="Phantom Wallet" data-pl="Portfel Phantom">👛 Phantom Wallet</a> |
+      <a href="https://x.com/Noktra1755" target="_blank" rel="noopener noreferrer" data-en="Twitter" data-pl="Twitter">🐦 Twitter</a> |
+      <a href="https://t.me/Noktra_AirDrop" target="_blank" rel="noopener noreferrer" data-en="Telegram" data-pl="Telegram">📱 Telegram</a>
+    </div>
   </div>
 
   <!-- Script handling language switching and form submission -->
-              <script src="script.js?v=26"></script>
+  <script src="script.js?v=28"></script>
 </body>
 </html>
