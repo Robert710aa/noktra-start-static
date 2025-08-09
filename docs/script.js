@@ -1,8 +1,16 @@
 /* Noktra Airdrop behaviour (PL only) */
 
+// Translation messages
+const duplicateMessages = {
+  en: "This address has already submitted an application.",
+  pl: "Ten adres już złożył zgłoszenie."
+};
 
-
-function setLanguage() {}`);
+// Language switching functionality
+function setLanguage(lang) {
+  const elements = document.querySelectorAll('[data-' + lang + ']');
+  elements.forEach(el => {
+    const translation = el.getAttribute('data-' + lang);
     if (translation) {
       el.textContent = translation;
     }
@@ -71,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   addressField.addEventListener('input', updateState);
   updateState();
+  
   // Local submission counter (per browser)
   const counterId = 'airdrop-counter';
   function ensureCounter() {
@@ -125,4 +134,35 @@ document.addEventListener('DOMContentLoaded', () => {
     form.reset();
     updateState();
   });
+
+  // Copy token address functionality
+  const copyBtn = document.getElementById('copy-token');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const address = copyBtn.getAttribute('data-address');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(address).then(() => {
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+          }, 2000);
+        });
+      } else {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = address;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      }
+    });
+  }
 });

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noktra Test Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+      color: white;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+    }
+    .test-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      border: 2px solid #00ffcc;
+    }
+    .status {
+      color: #00ffcc;
+      font-weight: bold;
+    }
+    .error {
+      color: #ff4444;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 Noktra Test Page</h1>
+  
+  <div class="test-box">
+    <h2>Status Test</h2>
+    <p class="status">✅ Jeśli widzisz niebieskie gradientowe tło - CSS działa poprawnie!</p>
+    <p class="error">❌ Jeśli widzisz tylko czarne tło - problem z CSS</p>
+  </div>
+  
+  <div class="test-box">
+    <h2>Informacje techniczne</h2>
+    <p><strong>Wersja:</strong> v8 (test)</p>
+    <p><strong>Czas:</strong> <span id="time"></span></p>
+    <p><strong>URL:</strong> <span id="url"></span></p>
+  </div>
+  
+  <div class="test-box">
+    <h2>Test JavaScript</h2>
+    <p>Kliknij przycisk, aby przetestować JavaScript:</p>
+    <button onclick="testJS()" style="background: #00ffcc; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Test JavaScript</button>
+    <p id="js-result"></p>
+  </div>
+  
+  <script>
+    // Test JavaScript
+    function testJS() {
+      document.getElementById('js-result').innerHTML = '✅ JavaScript działa poprawnie!';
+      document.getElementById('js-result').style.color = '#00ffcc';
+    }
+    
+    // Wyświetl aktualny czas
+    document.getElementById('time').textContent = new Date().toLocaleString('pl-PL');
+    
+    // Wyświetl URL
+    document.getElementById('url').textContent = window.location.href;
+    
+    console.log('Noktra Test Page loaded successfully');
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    .test-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test Page - Noktra</h1>
+  <div class="test-box">
+    <p>If you can see this with a dark blue gradient background, CSS is working.</p>
+    <p>If you see only black, there's a CSS loading issue.</p>
+  </div>
+  <div class="test-box">
+    <p>Current time: <span id="time"></span></p>
+  </div>
+  <script>
+    document.getElementById('time').textContent = new Date().toLocaleString();
+  </script>
+</body>
+</html>

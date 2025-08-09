@@ -1,21 +1,52 @@
+/* Noktra Airdrop Script - Version 7 */
+/* Updated for GitHub Pages compatibility */
+
 /* Noktra Airdrop behaviour (PL only) */
 
+// Translation messages
+const duplicateMessages = {
+  en: "This address has already submitted an application.",
+  pl: "Ten adres już złożył zgłoszenie."
+};
 
-
-function setLanguage() {}`);
+// Language switching functionality
+function setLanguage(lang) {
+  const elements = document.querySelectorAll('[data-' + lang + ']');
+  elements.forEach(el => {
+    const translation = el.getAttribute('data-' + lang);
     if (translation) {
       el.textContent = translation;
     }
   });
 }
 
+// Image error handling
+function handleImageError(img) {
+  img.style.display = 'none';
+  const parent = img.parentElement;
+  if (parent) {
+    const errorMsg = document.createElement('p');
+    errorMsg.textContent = 'Image not available';
+    errorMsg.style.color = '#ff6b6b';
+    errorMsg.style.fontSize = '0.9rem';
+    parent.appendChild(errorMsg);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Handle image loading errors
+  const images = document.querySelectorAll('img');
+  images.forEach(img => {
+    img.addEventListener('error', () => handleImageError(img));
+  });
+
   const form = document.getElementById('airdrop-form');
   const messageEl = document.getElementById('message');
   const addressField = document.getElementById('address');
   const submitBtn = form ? form.querySelector('button[type="submit"], input[type="submit"]') : null;
 
   if (!form || !messageEl || !addressField) {
+    console.warn('Required form elements not found');
     return;
   }
 
@@ -71,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   addressField.addEventListener('input', updateState);
   updateState();
+  
   // Local submission counter (per browser)
   const counterId = 'airdrop-counter';
   function ensureCounter() {
@@ -125,4 +157,59 @@ document.addEventListener('DOMContentLoaded', () => {
     form.reset();
     updateState();
   });
+
+  // Copy token address functionality
+  const copyBtn = document.getElementById('copy-token');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const address = copyBtn.getAttribute('data-address');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(address).then(() => {
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+          }, 2000);
+        }).catch(err => {
+          console.warn('Failed to copy to clipboard:', err);
+          // Fallback for clipboard API failure
+          fallbackCopy(address);
+        });
+      } else {
+        // Fallback for older browsers
+        fallbackCopy(address);
+      }
+    });
+  }
+
+  // Fallback copy function
+  function fallbackCopy(text) {
+    try {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      const originalText = copyBtn.textContent;
+      copyBtn.textContent = 'Copied!';
+      setTimeout(() => {
+        copyBtn.textContent = originalText;
+      }, 2000);
+    } catch (err) {
+      console.error('Fallback copy failed:', err);
+      copyBtn.textContent = 'Failed to copy';
+      setTimeout(() => {
+        copyBtn.textContent = 'Copy';
+      }, 2000);
+    }
+  }
+
+  // Console log for debugging
+  console.log('Noktra Airdrop script loaded successfully');
 });
