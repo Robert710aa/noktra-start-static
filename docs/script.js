@@ -1,4 +1,4 @@
-/* Noktra Airdrop Script - Version 20 */
+/* Noktra Airdrop Script - Version 21 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
 
 /* Noktra Airdrop behaviour (PL only) */

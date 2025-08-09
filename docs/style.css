@@ -1,4 +1,4 @@
-/* Noktra Airdrop Styles - Version 20 */
+/* Noktra Airdrop Styles - Version 21 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
 
 * {
@@ -307,6 +307,8 @@ button[type="submit"]:hover {
   max-width: 600px; /* Fixed for 3 cards */
   justify-content: center; /* Center the 3 cards */
   scrollbar-width: none; /* Hide scrollbar */
+  border: 2px solid red; /* DEBUG: Make strip visible */
+  background: rgba(255, 0, 0, 0.1); /* DEBUG: Make strip background visible */
 }
 
 .nft-strip::-webkit-scrollbar {
@@ -319,11 +321,16 @@ button[type="submit"]:hover {
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
+  border: 2px solid blue; /* DEBUG: Make cards visible */
+  background: rgba(0, 0, 255, 0.1); /* DEBUG: Make card background visible */
+  min-width: 150px; /* Ensure minimum width */
+  max-width: 200px; /* Ensure maximum width */
 }
 
 .nft-strip .nft-card:hover {
   transform: scale(1.05);
   z-index: 10;
+  border-color: yellow; /* DEBUG: Make hover visible */
 }
 
 .nft-strip .nft-card img {
@@ -332,11 +339,14 @@ button[type="submit"]:hover {
   border-radius: 15px;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid green; /* DEBUG: Make images visible */
+  display: block; /* Ensure image is displayed */
 }
 
 .nft-strip .nft-card:hover img {
   box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
   filter: brightness(1.05);
+  border-color: orange; /* DEBUG: Make hover visible */
 }
 
 /* Better headings and description */
