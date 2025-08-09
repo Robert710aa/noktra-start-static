@@ -1,24 +1,35 @@
-/* Noktra Airdrop - Main Stylesheet v36 */
+/* Noktra Airdrop - Main Stylesheet v37 */
 
-/* Normalne style - debugowanie usunięte */
+/* ULTRA AGRESYWNE DEBUGOWANIE - FORCE VISIBILITY */
 body {
-  background: var(--bg-color);
-  min-height: 100vh;
+  background: #ff0000 !important; /* Czerwone tło całej strony */
+  min-height: 100vh !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 .container {
-  background: var(--surface-color);
-  border: 1px solid var(--border-color);
-  min-height: 100vh;
-  position: relative;
-  z-index: 100;
-  margin: 120px auto;
-  padding: 2rem;
-  overflow: visible;
+  background: #00ff00 !important; /* Zielone tło kontenera */
+  border: 10px solid #0000ff !important; /* Niebieska ramka */
+  min-height: 100vh !important;
+  position: relative !important;
+  z-index: 100 !important;
+  margin: 20px auto !important; /* Zmniejszony margin */
+  padding: 2rem !important;
+  overflow: visible !important;
 }
 
 .container > * {
-  margin: 1rem 0;
+  margin: 1rem 0 !important;
+  background: #ffff00 !important; /* Żółte tło dla wszystkich elementów */
+  border: 5px solid #ff00ff !important; /* Magenta ramka */
+  padding: 20px !important;
+  min-height: 50px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1000 !important;
 }
 
 .logo {
