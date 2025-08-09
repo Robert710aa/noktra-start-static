@@ -12,25 +12,20 @@
   <meta property="og:url" content="https://robert710aa.github.io/noktra-start-static/">
   <meta name="theme-color" content="#00ffcc">
   <title>Noktra Airdrop</title>
-  <link rel="stylesheet" href="style.css?v=14">
-  <style>
-    /* Force background visibility */
-    body {
-      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%) !important;
-      background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa') !important;
-      background-repeat: no-repeat !important;
-      background-position: center center !important;
-      background-size: cover !important;
-      background-attachment: fixed !important;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css?v=18">
 </head>
 <body>
-  <div class="build-badge">BUILD v14</div>
+
 
   <!-- Top navigation link to the NFT gallery -->
   <div class="top-link">
     <a href="#nft-gallery" data-en="Noktra NFT Gallery" data-pl="Galeria NFT Noktra">Noktra NFT Gallery</a>
+  </div>
+
+  <!-- Language switcher -->
+  <div class="language-switcher">
+    <button onclick="setLanguage('en')">EN</button>
+    <button onclick="setLanguage('pl')">PL</button>
   </div>
 
   <!-- Corner logo overlay -->
@@ -38,30 +33,28 @@
 
   <!-- NFT Gallery Section -->
   <div id="nft-gallery" class="nft-gallery">
-    <h2>Noktra Genesis Collection</h2>
+    <h2 data-en="Noktra Genesis Collection" data-pl="Kolekcja Genesis Noktra">Noktra Genesis Collection</h2>
     <div class="nft-strip">
       <div class="nft-card">
-        <img src="https://arweave.net/gzH8e-VV2jwQ2x5DGVdHTrkqEYkYEdK99BbsYWeqPcg" alt="NFT 2">
-        <p>Noktra Genesis #2</p>
+        <img src="D3897B39-FBCA-41A6-9BC2-C88AF6DD2B6B.png" alt="Noktra NFT 1">
+        <p data-en="Noktra Genesis #1" data-pl="Noktra Genesis #1">Noktra Genesis #1</p>
       </div>
       <div class="nft-card">
-        <img src="D3897B39-FBCA-41A6-9BC2-C88AF6DD2B6B.png" alt="Noktra NFT 3">
-        <p>Noktra Genesis #3</p>
+        <img src="889DE7F5-6899-4172-A704-6EC2F9E3114A.png" alt="Noktra NFT 2">
+        <p data-en="Noktra Genesis #2" data-pl="Noktra Genesis #2">Noktra Genesis #2</p>
       </div>
       <div class="nft-card">
-        <img src="docs/background.png" alt="Noktra NFT 4">
-        <p>Noktra Genesis #4</p>
+        <img src="E7A36217-5496-4C3A-9439-87C9278E6F24.png" alt="Noktra NFT 3">
+        <p data-en="Noktra Genesis #3" data-pl="Noktra Genesis #3">Noktra Genesis #3</p>
       </div>
     </div>
   </div>
 
   <!-- Mission text -->
-  <p class="mission-text">Noktra is my personal dream, now becoming reality. Thank you for being a part of it. Born out of passion, faith, and the need to create something truly my own — Noktra is not a project, it's a feeling. It's the beginning of a journey that will take her to a place where the whole world will hear her name.</p>
+  <p class="mission-text" data-en="Noktra is my personal dream, now becoming reality. Thank you for being a part of it. Born out of passion, faith, and the need to create something truly my own — Noktra is not a project, it's a feeling. It's the beginning of a journey that will take her to a place where the whole world will hear her name." data-pl="Noktra to moje osobiste marzenie, które staje się rzeczywistością. Dziękuję, że jesteś tego częścią. Zrodzona z pasji, wiary i potrzeby stworzenia czegoś naprawdę mojego — Noktra to nie projekt, to uczucie. To początek podróży, która zaprowadzi ją do miejsca, gdzie cały świat usłyszy jej imię.">Noktra is my personal dream, now becoming reality. Thank you for being a part of it. Born out of passion, faith, and the need to create something truly my own — Noktra is not a project, it's a feeling. It's the beginning of a journey that will take her to a place where the whole world will hear her name.</p>
 
   <div class="container">
-    <div class="warning-banner">
-      No trading / no liquidity — do not buy on DEX. Official launch will be announced here.
-    </div>
+
 
     <h1 class="gradient-title" data-en="Noktra Airdrop" data-pl="Airdrop Noktra">Noktra Airdrop</h1>
 
@@ -69,30 +62,29 @@
       <p><strong data-en="Token" data-pl="Token">Token</strong>: NOK</p>
       <p><strong data-en="Total Supply" data-pl="Podaż">Total Supply</strong>: 1,000,000,000</p>
       <p><strong data-en="Network" data-pl="Sieć">Network</strong>: Solana</p>
-      <p><strong>Token Address:</strong> <a href="https://solscan.io/token/48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1TbL" target="_blank" rel="noopener noreferrer">Solscan</a>
-      <button id="copy-token" class="copy-btn" type="button" data-address="48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1TbL">Copy</button></p>
+      <p><strong data-en="Token Address" data-pl="Adres tokenu">Token Address</strong>: <a href="https://solscan.io/token/48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1bL" target="_blank" rel="noopener noreferrer">Solscan</a>
+      <button id="copy-token" class="copy-btn" type="button" data-address="48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1bL" data-en="Copy" data-pl="Kopiuj">Copy</button></p>
     </div>
 
-    <!-- Countdown placeholder -->
-    <p id="counter" style="text-align:center; font-weight:bold; margin-top:1rem; color:#00ffcc;"></p>
+
 
     <!-- Airdrop registration form -->
     <form id="airdrop-form" novalidate>
-      <input type="text" id="address" name="address" placeholder="Solana Address" required>
-      <input type="text" id="twitter" name="twitter" placeholder="Twitter Username" required>
-      <input type="text" id="telegram" name="telegram" placeholder="Telegram Username" required>
+      <input type="text" id="address" name="address" placeholder="Solana Address" data-en="Solana Address" data-pl="Adres Solana" required>
+      <input type="text" id="twitter" name="twitter" placeholder="Twitter Username" data-en="Twitter Username" data-pl="Nazwa użytkownika Twitter" required>
+      <input type="text" id="telegram" name="telegram" placeholder="Telegram Username" data-en="Telegram Username" data-pl="Nazwa użytkownika Telegram" required>
       <button type="submit" data-en="Submit to Airdrop" data-pl="Zgłoś się do airdropu">Submit to Airdrop</button>
     </form>
     <p id="message"></p>
 
     <div class="socials">
-      <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer">Phantom Wallet</a> |
-      <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a> |
-      <a href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer" data-en="Phantom Wallet" data-pl="Portfel Phantom">Phantom Wallet</a> |
+      <a href="#" target="_blank" rel="noopener noreferrer" data-en="Twitter" data-pl="Twitter">Twitter</a> |
+      <a href="#" target="_blank" rel="noopener noreferrer" data-en="Telegram" data-pl="Telegram">Telegram</a>
     </div>
   </div>
 
   <!-- Script handling language switching and form submission -->
-  <script src="script.js?v=14"></script>
+  <script src="script.js?v=18"></script>
 </body>
 </html>

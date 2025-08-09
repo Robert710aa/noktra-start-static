@@ -1,3 +1,6 @@
+/* Noktra Airdrop Script - Version 18 */
+/* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
+
 /* Noktra Airdrop behaviour (PL only) */
 
 // Translation messages
@@ -17,13 +20,33 @@ function setLanguage(lang) {
   });
 }
 
+// Image error handling
+function handleImageError(img) {
+  img.style.display = 'none';
+  const parent = img.parentElement;
+  if (parent) {
+    const errorMsg = document.createElement('p');
+    errorMsg.textContent = 'Image not available';
+    errorMsg.style.color = '#ff6b6b';
+    errorMsg.style.fontSize = '0.9rem';
+    parent.appendChild(errorMsg);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Handle image loading errors
+  const images = document.querySelectorAll('img');
+  images.forEach(img => {
+    img.addEventListener('error', () => handleImageError(img));
+  });
+
   const form = document.getElementById('airdrop-form');
   const messageEl = document.getElementById('message');
   const addressField = document.getElementById('address');
   const submitBtn = form ? form.querySelector('button[type="submit"], input[type="submit"]') : null;
 
   if (!form || !messageEl || !addressField) {
+    console.warn('Required form elements not found');
     return;
   }
 
@@ -77,86 +100,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  addressField.addEventListener('input', updateState);
-  updateState();
-  
-  // Local submission counter (per browser)
-  const counterId = 'airdrop-counter';
   function ensureCounter() {
-    let counter = document.getElementById(counterId);
+    let counter = document.getElementById('airdrop-counter');
     if (!counter) {
-      counter = document.createElement('p');
-      counter.id = counterId;
-      counter.style.marginTop = '8px';
-      counter.style.color = '#cccccc';
-      const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
-      if (submitBtn) {
-        submitBtn.insertAdjacentElement('afterend', counter);
-      } else if (messageEl) {
-        messageEl.insertAdjacentElement('afterend', counter);
-      } else {
-        form.appendChild(counter);
-      }
+      counter = document.createElement('div');
+      counter.id = 'airdrop-counter';
+      counter.style.cssText = 'text-align: center; margin: 1rem 0; color: #00ffcc; font-size: 0.9rem;';
+      form.parentNode.insertBefore(counter, form.nextSibling);
     }
     return counter;
   }
+
   function getSubmissionCount() {
     try {
-      const list = JSON.parse(localStorage.getItem('submittedAddresses') || '[]');
-      return Array.isArray(list) ? list.length : 0;
+      return getList().length;
     } catch {
       return 0;
     }
   }
+
   function renderCounter() {
     const counter = ensureCounter();
-    const num = getSubmissionCount();
-    counter.textContent = `Liczba zgłoszeń (lokalnie): ${num}`;
+    const count = getSubmissionCount();
+    counter.textContent = `Liczba zgłoszeń: ${count}`;
   }
-  renderCounter();
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const address = normalize(addressField.value);
-
-    if (!address) {
-      setMessage(emptyMessage, '#ff0000');
-      return;
-    }
-    if (hasSubmitted(address)) {
-      setMessage(duplicateMessage, '#ff0000');
-      return;
-    }
-
-    markSubmitted(address);
-    renderCounter();
-    setMessage(successMessage, '#00a8b5');
-    form.reset();
-    updateState();
-  });
 
   // Copy token address functionality
   const copyBtn = document.getElementById('copy-token');
   if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
+    copyBtn.addEventListener('click', async () => {
       const address = copyBtn.getAttribute('data-address');
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(address).then(() => {
-          const originalText = copyBtn.textContent;
-          copyBtn.textContent = 'Copied!';
-          setTimeout(() => {
-            copyBtn.textContent = originalText;
-          }, 2000);
-        });
-      } else {
+      if (!address) return;
+
+      try {
+        await navigator.clipboard.writeText(address);
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      } catch (err) {
         // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = address;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        
+        fallbackCopy(address);
         const originalText = copyBtn.textContent;
         copyBtn.textContent = 'Copied!';
         setTimeout(() => {
@@ -165,4 +150,62 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  function fallbackCopy(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Fallback copy failed:', err);
+    }
+    document.body.removeChild(textArea);
+  }
+
+  // Form submission handling
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const address = normalize(addressField.value);
+    if (!address) {
+      setMessage(emptyMessage, '#ff0000');
+      return;
+    }
+
+    if (hasSubmitted(address)) {
+      setMessage(duplicateMessage, '#ff0000');
+      return;
+    }
+
+    // Simulate form submission
+    setMessage('Przetwarzanie...', '#00ffcc');
+    
+    setTimeout(() => {
+      markSubmitted(address);
+      setMessage(successMessage, '#00ff00');
+      form.reset();
+      renderCounter();
+      
+      // Reset message after 5 seconds
+      setTimeout(() => {
+        if (messageEl.textContent === successMessage) {
+          setMessage('', '');
+        }
+      }, 5000);
+    }, 1000);
+  });
+
+  // Real-time validation
+  addressField.addEventListener('input', updateState);
+  addressField.addEventListener('blur', updateState);
+
+  // Initial state
+  updateState();
+  renderCounter();
 });

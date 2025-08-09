@@ -1,5 +1,5 @@
-/* Noktra Airdrop Script - Version 14 */
-/* Fixed NFT display - removed onerror attributes for debugging */
+/* Noktra Airdrop Script - Version 18 */
+/* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
 
 /* Noktra Airdrop behaviour (PL only) */
 
@@ -222,6 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     img.addEventListener('error', () => {
       console.error(`NFT ${index + 1} failed to load:`, img.src);
+      // Use logo.png as fallback for any failed images
+      img.src = 'logo.png';
     });
   });
 });
