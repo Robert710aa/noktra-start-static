@@ -1,4 +1,4 @@
-/* Noktra Airdrop - Main Stylesheet v34 */
+/* Noktra Airdrop - Main Stylesheet v35 */
 
 /* Normalne style - debugowanie usunięte */
 body {
@@ -41,11 +41,14 @@ body {
 .airdrop-form {
   max-width: 600px;
   margin: 0 auto;
-  background: var(--surface-color);
+  background: #ff0000 !important; /* Czerwony tło żeby było widoczne */
   padding: 30px;
   border-radius: 20px;
   backdrop-filter: blur(10px);
-  border: 1px solid var(--border-color);
+  border: 5px solid #00ff00 !important; /* Zielona ramka */
+  min-height: 300px !important; /* Wymuszenie wysokości */
+  position: relative !important;
+  z-index: 9999 !important; /* Bardzo wysoki z-index */
 }
 
 .form-group {
