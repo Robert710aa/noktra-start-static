@@ -1,4 +1,4 @@
-/* Noktra Airdrop Script - Version 31 */
+/* Noktra Airdrop Script - Version 32 */
 /* Fixed NFT display - using 3 local PNG files - removed duplicate styles */
 /* Added copy notification, enhanced functionality, dark mode toggle, and progress bar */
 
