@@ -196,3 +196,17 @@ button[type="submit"]:hover {
 }
 
 .warning-banner { background-color: #ffcc00; color: #000; border-radius: 8px; padding: 0.6rem 0.8rem; margin-bottom: 1rem; font-weight: 600; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+
+.copy-btn{margin-left:8px;padding:0.3rem 0.6rem;border:0;border-radius:6px;background:#ffffffcc;color:#000;cursor:pointer}
+
+.faq,.roadmap{max-width:720px;margin:2rem auto;padding:1rem;border-radius:12px;background:rgba(0,0,0,0.6);color:#fff;box-shadow:0 0 12px #00ffcc44}
+.faq h2,.roadmap h2{margin-top:0}
+.faq-item{margin:0.6rem 0}
+.faq-q{width:100%;text-align:left;background:#111;color:#fff;border:1px solid #222;padding:0.6rem;border-radius:8px;cursor:pointer}
+.faq-a{display:none;padding:0.6rem 0.6rem 0;color:#ddd}
+.timeline{list-style:none;padding:0}
+.timeline li{margin:0.4rem 0}
+.timeline li span{display:inline-block;min-width:90px;font-weight:700;color:#00ffcc}
+
+.back-to-top{position:fixed;right:1rem;bottom:1rem;padding:0.5rem 0.7rem;border-radius:8px;border:0;background:#00a8b5;color:#fff;cursor:pointer;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.back-to-top.show{display:block}
