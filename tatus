@@ -1,0 +1,5 @@
+[33m2eefbc3[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Fix layout and styling issues, add new files
+[33me92a16d[m Fix: Remove all debug styles and restore normal appearance - v38
+[33m99efe0e[m Fix: Apply ultra-aggressive debug styles to entire page - v37
+[33m2c0e18c[m Fix: Add ultra-aggressive debug styles to force form visibility - v36
+[33mc08d904[m Fix: Add debug styles to make form visible - v35
