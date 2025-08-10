@@ -54,21 +54,15 @@
   <!-- NFT Gallery Section - AT THE VERY TOP -->
   <div id="nft-gallery" class="nft-gallery">
     <h2>Kolekcja Genesis Noktra</h2>
-    <div class="nft-strip">
-      <div class="nft-card green">
+    <div class="token-bar">
+      <div class="token-item">
         <img src="889DE7F5-6899-4172-A704-6EC2F9E3114A.png" alt="Token Noktra 1">
-        <h3>Token Noktra #1</h3>
-        <p>Pierwszy token z kolekcji Genesis</p>
       </div>
-      <div class="nft-card orange">
+      <div class="token-item">
         <img src="D3897B39-FBCA-41A6-9BC2-C88AF6DD2B6B.png" alt="Token Noktra 2">
-        <h3>Token Noktra #2</h3>
-        <p>Drugi token z kolekcji Genesis</p>
       </div>
-      <div class="nft-card blue">
+      <div class="token-item">
         <img src="E7A36217-5496-4C3A-9439-87C9278E6F24.png" alt="Token Noktra 3">
-        <h3>Token Noktra #3</h3>
-        <p>Trzeci token z kolekcji Genesis</p>
       </div>
     </div>
   </div>
@@ -165,8 +159,76 @@
       
       event.target.classList.add('active');
       
-      // Here you can add language switching logic
-      console.log('Language switched to:', lang);
+      // Update document language
+      document.documentElement.setAttribute('lang', lang);
+      
+      // Update content based on language
+      const translations = {
+        pl: {
+          title: 'Noktra',
+          subtitle: 'Twój osobisty sen staje się rzeczywistością',
+          galleryTitle: 'Kolekcja Genesis Noktra',
+          airdropTitle: 'Airdrop Noktra',
+          nameLabel: 'Imię',
+          emailLabel: 'Email',
+          walletLabel: 'Adres Solana',
+          messageLabel: 'Wiadomość (opcjonalnie)',
+          submitBtn: 'Zgłoś się do airdropu',
+          visitText: 'Wizyty',
+          progressText: 'Postęp formularza',
+          themeText: 'Tryb Ciemny',
+          description: 'Noktra to moje osobiste marzenie, które staje się rzeczywistością. Dziękuję, że jesteś tego częścią. Zrodzona z pasji, wiary i potrzeby stworzenia czegoś naprawdę mojego — Noktra to nie projekt, to uczucie. To początek podróży, która zaprowadzi ją do miejsca, gdzie cały świat usłyszy jej imię.'
+        },
+        en: {
+          title: 'Noktra',
+          subtitle: 'Your personal dream becomes reality',
+          galleryTitle: 'Noktra Genesis Collection',
+          airdropTitle: 'Noktra Airdrop',
+          nameLabel: 'Name',
+          emailLabel: 'Email',
+          walletLabel: 'Solana Address',
+          messageLabel: 'Message (optional)',
+          submitBtn: 'Register for airdrop',
+          visitText: 'Visits',
+          progressText: 'Form progress',
+          themeText: 'Dark Mode',
+          description: 'Noktra is my personal dream becoming reality. Thank you for being part of this. Born from passion, faith and the need to create something truly mine — Noktra is not a project, it\'s a feeling. This is the beginning of a journey that will take it to a place where the whole world will hear its name.'
+        }
+      };
+      
+      const t = translations[lang];
+      if (t) {
+        // Update header
+        document.querySelector('.header h1').textContent = t.title;
+        document.querySelector('.header h2').textContent = t.subtitle;
+        
+        // Update gallery
+        document.querySelector('.nft-gallery h2').textContent = t.galleryTitle;
+        
+        // Update container
+        document.querySelector('.container h2').textContent = t.airdropTitle;
+        
+        // Update form labels
+        document.querySelector('label[for="name"]').textContent = t.nameLabel;
+        document.querySelector('label[for="email"]').textContent = t.emailLabel;
+        document.querySelector('label[for="wallet"]').textContent = t.walletLabel;
+        document.querySelector('label[for="message"]').textContent = t.messageLabel;
+        
+        // Update submit button
+        document.querySelector('button[type="submit"]').textContent = t.submitBtn;
+        
+        // Update other text
+        const visitSpan = document.querySelector('.visit-counter span:first-child');
+        if (visitSpan) visitSpan.textContent = t.visitText;
+        
+        const progressText = document.querySelector('.progress-text');
+        if (progressText) progressText.textContent = t.progressText;
+        
+        // Update description
+        document.querySelector('.description').textContent = t.description;
+        
+        console.log('Language switched to:', lang);
+      }
     }
 
     // Form progress tracking

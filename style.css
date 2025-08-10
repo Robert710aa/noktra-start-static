@@ -30,7 +30,7 @@
   --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
-/* Background - UPDATED TO MATCH HTML */
+/* Background - FIXED OPACITY */
 .background {
   position: fixed;
   top: 0;
@@ -38,7 +38,7 @@
   width: 100%;
   height: 100%;
   background: url('background.png') center center/cover no-repeat;
-  opacity: 0.9;
+  opacity: 0.1;
   z-index: -1;
 }
 
@@ -277,16 +277,7 @@ body {
   margin: 3rem 0;
 }
 
-.airdrop-form {
-  max-width: 280px !important;
-  margin: 15px auto !important;
-  background: var(--surface-color);
-  padding: 12px !important;
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 6px 15px var(--shadow-color);
-}
+/* Form is styled by .container class instead */
 
 .form-group {
   margin-bottom: 1rem;
@@ -300,15 +291,17 @@ body {
   font-size: 14px;
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea {
   width: 100%;
-  padding: 6px 10px !important;
+  padding: 15px;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 10px;
   background: var(--input-bg);
   color: var(--text-color);
-  font-size: 13px !important;
+  font-size: 16px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
 }
 
 .form-group input:focus {
@@ -787,29 +780,24 @@ body[data-lang="en"] .nft-strip .nft-card[data-en]::after {
 }
 
 /* Enhanced Submit Button */
-.airdrop-form button[type="submit"] {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--primary-color) 100%);
-  background-size: 200% 200%;
-  animation: gradientShift 3s ease infinite;
+/* Buttons - PROFESSIONAL */
+.btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
   border: none;
-  color: var(--text-color);
-  padding: 8px 16px !important;
-  border-radius: 15px;
-  font-weight: bold;
-  font-size: 13px !important;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  width: 100%;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px var(--shadow-color);
+  box-shadow: var(--shadow);
+  letter-spacing: 0.5px;
 }
 
-.airdrop-form button[type="submit"]:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px var(--shadow-color);
-}
-
-.airdrop-form button[type="submit"]:active {
-  transform: translateY(-1px);
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(44, 62, 80, 0.4);
 }
 
 /* Base Styles */
