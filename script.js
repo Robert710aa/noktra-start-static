@@ -192,10 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const form = document.getElementById('airdrop-form');
-  const messageEl = document.getElementById('message');
-  const addressField = document.getElementById('address');
-  const twitterField = document.getElementById('twitter');
-  const telegramField = document.getElementById('telegram');
+  const messageEl = document.getElementById('messageDisplay');
+  const addressField = document.getElementById('wallet');
+  const twitterField = document.getElementById('name');
+  const telegramField = document.getElementById('email');
   const submitBtn = form ? form.querySelector('button[type="submit"], input[type="submit"]') : null;
 
   if (!form || !messageEl || !addressField) {
@@ -257,6 +257,9 @@ document.addEventListener('DOMContentLoaded', () => {
   addressField.addEventListener('input', updateFormProgress);
   if (twitterField) twitterField.addEventListener('input', updateFormProgress);
   if (telegramField) telegramField.addEventListener('input', updateFormProgress);
+  // Also add for message field
+  const messageField = document.getElementById('message');
+  if (messageField) messageField.addEventListener('input', updateFormProgress);
   
   addressField.addEventListener('input', updateState);
   updateState();

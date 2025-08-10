@@ -1,32 +1,36 @@
 /* Noktra Airdrop - Main Stylesheet v47 */
 
-/* CSS Variables for theming */
+/* CSS Variables for theming - UPDATED */
 :root {
-  --primary-color: #00ffcc;
-  --secondary-color: #00ccff;
-  --background-color: #0a0a0a;
-  --bg-color: #0a0a0a;
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-orange: #e67e22;
+  --accent-blue: #3498db;
+  --background-color: #1a1a1a;
+  --bg-color: #1a1a1a;
   --surface-color: rgba(255, 255, 255, 0.05);
-  --input-bg: rgba(255, 255, 255, 0.1);
-  --text-color: #ffffff;
-  --text-secondary: #cccccc;
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --text-color: #ecf0f1;
+  --text-secondary: #bdc3c7;
   --border-color: rgba(255, 255, 255, 0.1);
-  --shadow-color: rgba(0, 255, 204, 0.3);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-color: rgba(44, 62, 80, 0.3);
 }
 
-/* Light theme variables */
+/* Light theme variables - UPDATED */
 [data-theme="light"] {
-  --background-color: #f5f5f5;
-  --bg-color: #f5f5f5;
+  --background-color: #f8f9fa;
+  --bg-color: #f8f9fa;
   --surface-color: rgba(0, 0, 0, 0.05);
   --input-bg: rgba(0, 0, 0, 0.05);
-  --text-color: #000000;
-  --text-secondary: #666666;
+  --text-color: #2c3e50;
+  --text-secondary: #34495e;
   --border-color: rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
-/* Background */
+/* Background - UPDATED TO MATCH HTML */
 .background {
   position: fixed;
   top: 0;
@@ -34,11 +38,11 @@
   width: 100%;
   height: 100%;
   background: url('background.png') center center/cover no-repeat;
-  opacity: 0.1;
+  opacity: 0.9;
   z-index: -1;
 }
 
-/* Corner Logo */
+/* Corner Logo - UPDATED FROM HTML */
 .corner-logo {
   position: fixed;
   top: 1rem;
@@ -46,13 +50,17 @@
   z-index: 1000;
   width: 60px;
   height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  background: var(--surface-color);
+  backdrop-filter: blur(10px);
 }
 
 .corner-logo img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  border-radius: 10px;
+  object-fit: cover;
   transition: all 0.3s ease;
 }
 
@@ -80,19 +88,130 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Header Styles - MISSING FROM CSS */
+.header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.header h1 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.header h2 {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
+/* NFT Gallery Styles - MISSING FROM CSS */
+.nft-gallery {
+  padding: 40px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.nft-gallery h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--text-color);
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nft-strip {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nft-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  padding: 20px;
+  width: 280px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.nft-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  border-color: var(--primary-color);
+}
+
+.nft-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.nft-card:hover img {
+  transform: scale(1.02);
+}
+
+.nft-card h3 {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.nft-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Noktra Description Styles - MISSING FROM CSS */
+.noktra-description {
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* Main Container - UPDATED TO MATCH HTML */
 .container {
   background: var(--surface-color);
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  max-width: 800px;
-  width: 90%;
+  padding: 40px;
+  margin: 40px auto;
+  max-width: 600px;
+  backdrop-filter: blur(15px);
+  box-shadow: var(--shadow);
   position: relative;
-  z-index: 100;
-  margin: 120px auto;
-  padding: 2rem;
-  overflow: visible;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 20px 40px var(--shadow-color);
+  z-index: 2;
 }
 
 .container > * {
@@ -284,37 +403,73 @@ body {
   }
 }
 
-/* Theme Toggle */
+/* Theme Toggle - UPDATED FROM HTML */
 .theme-toggle {
   position: fixed;
   top: 1rem;
-  right: 1rem;
+  right: 5rem;
   z-index: 1000;
 }
 
 .theme-toggle button {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  border: none;
-  border-radius: 25px;
-  padding: 10px 20px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
   color: var(--text-color);
+  padding: 8px 16px;
+  border-radius: 20px;
   cursor: pointer;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 15px var(--shadow-color);
-  transition: all 0.3s ease;
 }
 
 .theme-toggle button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px var(--shadow-color);
+  background: var(--primary-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
 }
 
 .theme-toggle button:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
+}
+
+/* Language Switcher - UPDATED FROM HTML */
+.language-switcher {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+}
+
+.lang-btn {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 8px 16px;
+  margin: 0 2px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.lang-btn.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.lang-btn:hover {
+  background: var(--primary-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
 }
 
 /* Language switcher button focus */
@@ -597,14 +752,14 @@ body[data-lang="en"] .nft-strip .nft-card[data-en]::after {
   content: "📱";
 }
 
-/* Copy Notification */
+/* Copy Notification - UPDATED */
 .copy-notification {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: var(--text-color);
+  color: white;
   padding: 15px 25px;
   border-radius: 25px;
   font-weight: bold;
@@ -898,148 +1053,108 @@ body[data-lang="en"] .nft-strip .nft-card[data-en]::after {
 
 /* Responsive Design */
 
-/* Tablet and smaller desktop */
+/* Updated Responsive Design - UNIFIED */
 @media (max-width: 1024px) {
   .container {
     max-width: 90%;
-    margin: 100px auto;
+    margin: 40px auto;
+    padding: 30px;
   }
   
-  .logo img {
-    max-width: 300px;
+  .header h1 {
+    font-size: 3rem;
   }
   
-  .mission-text {
-    font-size: 16px;
-    line-height: 1.6;
+  .nft-gallery h2 {
+    font-size: 2.2rem;
   }
 }
 
-/* Mobile and tablet */
+/* Mobile and tablet - UPDATED FROM HTML */
 @media (max-width: 768px) {
-  .container {
-    margin: 80px auto;
-    padding: 1.5rem;
-  }
-  
-  .gradient-title {
+  .header h1 {
     font-size: 2.5rem;
   }
-  
-  .nft-strip {
-    max-width: 100%;
-    gap: 15px;
-  }
-  
-  .nft-card img {
-    width: 120px;
-    height: 120px;
-  }
-  
-  .airdrop-form {
-    max-width: 280px;
-    padding: 12px;
-    margin: 15px auto;
-  }
-  
-  .form-group input {
-    padding: 8px 12px;
-    font-size: 16px; /* Prevents zoom on iOS */
-  }
-  
-  .token-info {
-    padding: 15px;
-  }
-  
-  .mission-text {
-    font-size: 14px;
-    line-height: 1.5;
-    text-align: center;
+
+  .header h2 {
+    font-size: 1.1rem;
   }
 
-  .token-bar {
-    gap: 15px;
-    padding: 10px;
+  .nft-gallery h2 {
+    font-size: 2rem;
   }
-  
-  .token-item {
-    width: 60px;
-    height: 60px;
+
+  .nft-strip {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
-  
-  .copy-btn {
-    margin-left: 5px;
-    padding: 6px 12px;
-    font-size: 12px;
+
+  .nft-card {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
   }
-  
-  .theme-toggle {
-    top: 0.5rem;
-    right: 0.5rem;
+
+  .container {
+    margin: 20px;
+    padding: 25px;
   }
-  
-  .theme-toggle button {
-    padding: 8px 16px;
-    font-size: 12px;
+
+  .noktra-description {
+    margin: 20px;
+    padding: 25px;
   }
-  
+
   .language-switcher {
     top: 0.5rem;
     left: 0.5rem;
   }
-  
-  .language-switcher button {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-  
-  .top-link {
+
+  .theme-toggle {
     top: 0.5rem;
+    right: 4rem;
   }
-  
-  .top-link a {
-    padding: 6px 12px;
-    font-size: 12px;
+
+  .corner-logo {
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 50px;
+    height: 50px;
   }
 }
 
 @media (max-width: 480px) {
-  .gradient-title {
+  .header h1 {
     font-size: 2rem;
   }
-  
-  .nft-strip {
-    gap: 10px;
-  }
-  
-  .nft-card {
-    padding: 10px;
-  }
-  
-  .nft-card img {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .socials a {
-    display: block;
-    margin: 10px 0;
-  }
-  
-  .container {
-    margin: 60px auto;
-    padding: 1rem;
+
+  .header h2 {
+    font-size: 1rem;
   }
 
-  .token-bar {
-    gap: 10px;
-    padding: 8px;
-    flex-wrap: wrap;
+  .nft-gallery h2 {
+    font-size: 1.8rem;
   }
-  
-  .token-item {
-    width: 50px;
-    height: 50px;
+
+  .container {
+    margin: 15px;
+    padding: 20px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .nft-card {
+    padding: 15px;
   }
 }
 
