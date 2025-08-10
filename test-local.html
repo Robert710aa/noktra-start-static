@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Noktra Airdrop - LOCAL TEST</title>
+  <style>
+    /* Inline CSS for testing */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #0a0a0a;
+      color: white;
+    }
+    
+    .test-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    
+    .progress-container {
+      margin: 20px 0;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #00ffcc;
+      padding: 10px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .visit-counter {
+      background: #00ffcc;
+      color: black;
+      padding: 10px;
+      border-radius: 5px;
+      display: inline-block;
+      margin: 10px 0;
+    }
+    
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('background.png') center center/cover no-repeat;
+      opacity: 0.1;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Image -->
+  <div class="background"></div>
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+  <div class="test-container">
+    <h1>🚀 Noktra Airdrop - LOCAL TEST 🚀</h1>
+    
+    <!-- Visit Counter -->
+    <div class="visit-counter">
+      Wizyty: <span id="visitCounter">0</span>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div>Postęp formularza</div>
+    </div>
+    
+    <p>To jest test lokalny - jeśli widzisz te elementy, to znaczy że HTML działa!</p>
+    
+    <form id="test-form">
+      <input type="text" placeholder="Test input" required>
+      <button type="submit">Test Submit</button>
+    </form>
+    
+    <div id="message"></div>
+  </div>
+
+  <script>
+    // Inline JavaScript for testing
+    let visitCount = localStorage.getItem('visitCount') || 0;
+    visitCount++;
+    localStorage.setItem('visitCount', visitCount);
+    document.getElementById('visitCounter').textContent = visitCount;
+    
+    // Progress bar
+    const form = document.getElementById('test-form');
+    const progressFill = document.getElementById('progressFill');
+    
+    form.addEventListener('input', function() {
+      const inputs = form.querySelectorAll('input');
+      const filled = Array.from(inputs).filter(input => input.value.trim() !== '').length;
+      const progress = (filled / inputs.length) * 100;
+      progressFill.style.width = progress + '%';
+    });
+    
+    // Theme toggle
+    function toggleTheme() {
+      document.body.style.background = document.body.style.background === 'white' ? '#0a0a0a' : 'white';
+      document.body.style.color = document.body.style.color === 'black' ? 'white' : 'black';
+    }
+    
+    // Form submission
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('message').innerHTML = '✅ Formularz działa!';
+    });
+  </script>
+</body>
+</html>

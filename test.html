@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Noktra Airdrop</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 8px; }
+    .success { background-color: #d4edda; border-color: #c3e6cb; }
+    .error { background-color: #f8d7da; border-color: #f5c6cb; }
+    button { padding: 8px 16px; margin: 5px; cursor: pointer; }
+    input { padding: 8px; margin: 5px; width: 200px; }
+  </style>
+</head>
+<body>
+  <h1>Test Noktra Airdrop</h1>
+  
+  <div class="test-section">
+    <h3>Test 1: Sprawdzenie plików</h3>
+    <div id="files-test"></div>
+  </div>
+  
+  <div class="test-section">
+    <h3>Test 2: Funkcje JavaScript</h3>
+    <button onclick="testLanguageSwitch()">Test przełączania języka</button>
+    <button onclick="testThemeToggle()">Test przełączania motywu</button>
+    <button onclick="testCopyFunction()">Test kopiowania</button>
+    <div id="js-test"></div>
+  </div>
+  
+  <div class="test-section">
+    <h3>Test 3: Formularz</h3>
+    <input type="text" id="test-address" placeholder="Adres Solana" value="test123">
+    <input type="text" id="test-twitter" placeholder="Twitter" value="testuser">
+    <input type="text" id="test-telegram" placeholder="Telegram" value="testuser">
+    <button onclick="testForm()">Test formularza</button>
+    <div id="form-test"></div>
+  </div>
+  
+  <div class="test-section">
+    <h3>Test 4: LocalStorage</h3>
+    <button onclick="testLocalStorage()">Test localStorage</button>
+    <button onclick="clearTestData()">Wyczyść dane testowe</button>
+    <div id="storage-test"></div>
+  </div>
+
+  <script>
+    // Test 1: Sprawdzenie plików
+    function testFiles() {
+      const files = ['index.html', 'style.css', 'script.js', 'logo.png'];
+      const results = [];
+      
+      files.forEach(file => {
+        try {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', file, false);
+          xhr.send();
+          if (xhr.status === 200) {
+            results.push(`✅ ${file} - OK`);
+          } else {
+            results.push(`❌ ${file} - Błąd ${xhr.status}`);
+          }
+        } catch (e) {
+          results.push(`❌ ${file} - Błąd: ${e.message}`);
+        }
+      });
+      
+      document.getElementById('files-test').innerHTML = results.join('<br>');
+    }
+    
+    // Test 2: Funkcje JavaScript
+    function testLanguageSwitch() {
+      try {
+        if (typeof setLanguage === 'function') {
+          setLanguage('en');
+          document.getElementById('js-test').innerHTML = '✅ Przełączanie języka działa';
+        } else {
+          document.getElementById('js-test').innerHTML = '❌ Funkcja setLanguage nie istnieje';
+        }
+      } catch (e) {
+        document.getElementById('js-test').innerHTML = '❌ Błąd: ' + e.message;
+      }
+    }
+    
+    function testThemeToggle() {
+      try {
+        if (typeof toggleTheme === 'function') {
+          toggleTheme();
+          document.getElementById('js-test').innerHTML += '<br>✅ Przełączanie motywu działa';
+        } else {
+          document.getElementById('js-test').innerHTML += '<br>❌ Funkcja toggleTheme nie istnieje';
+        }
+      } catch (e) {
+        document.getElementById('js-test').innerHTML += '<br>❌ Błąd: ' + e.message;
+      }
+    }
+    
+    function testCopyFunction() {
+      try {
+        if (typeof copyToClipboard === 'function') {
+          copyToClipboard('test123');
+          document.getElementById('js-test').innerHTML += '<br>✅ Funkcja kopiowania działa';
+        } else {
+          document.getElementById('js-test').innerHTML += '<br>❌ Funkcja copyToClipboard nie istnieje';
+        }
+      } catch (e) {
+        document.getElementById('js-test').innerHTML += '<br>❌ Błąd: ' + e.message;
+      }
+    }
+    
+    // Test 3: Formularz
+    function testForm() {
+      try {
+        const address = document.getElementById('test-address').value;
+        const twitter = document.getElementById('test-twitter').value;
+        const telegram = document.getElementById('test-telegram').value;
+        
+        if (address && twitter && telegram) {
+          // Symulacja zapisania do localStorage
+          const submission = { address, twitter, telegram, timestamp: Date.now() };
+          const submissions = JSON.parse(localStorage.getItem('testSubmissions') || '[]');
+          submissions.push(submission);
+          localStorage.setItem('testSubmissions', JSON.stringify(submissions));
+          
+          document.getElementById('form-test').innerHTML = '✅ Formularz działa - dane zapisane';
+        } else {
+          document.getElementById('form-test').innerHTML = '❌ Wypełnij wszystkie pola';
+        }
+      } catch (e) {
+        document.getElementById('form-test').innerHTML = '❌ Błąd: ' + e.message;
+      }
+    }
+    
+    // Test 4: LocalStorage
+    function testLocalStorage() {
+      try {
+        const testData = { test: 'data', timestamp: Date.now() };
+        localStorage.setItem('testData', JSON.stringify(testData));
+        const retrieved = JSON.parse(localStorage.getItem('testData'));
+        
+        if (retrieved.test === 'data') {
+          document.getElementById('storage-test').innerHTML = '✅ LocalStorage działa';
+        } else {
+          document.getElementById('storage-test').innerHTML = '❌ LocalStorage nie działa poprawnie';
+        }
+      } catch (e) {
+        document.getElementById('storage-test').innerHTML = '❌ Błąd LocalStorage: ' + e.message;
+      }
+    }
+    
+    function clearTestData() {
+      try {
+        localStorage.removeItem('testSubmissions');
+        localStorage.removeItem('testData');
+        document.getElementById('storage-test').innerHTML = '✅ Dane testowe wyczyszczone';
+      } catch (e) {
+        document.getElementById('storage-test').innerHTML = '❌ Błąd: ' + e.message;
+      }
+    }
+    
+    // Uruchom testy przy załadowaniu
+    window.onload = function() {
+      testFiles();
+    };
+  </script>
+</body>
+</html>
