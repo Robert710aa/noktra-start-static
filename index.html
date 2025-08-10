@@ -1,60 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Noktra Airdrop - Dołącz do ekosystemu Noktra i zarejestruj się do airdropu tokenów">
+  <meta name="keywords" content="Noktra, Airdrop, Solana, NFT, Kryptowaluta, Token">
+  <meta name="author" content="Noktra Team">
+  <meta property="og:title" content="Noktra Airdrop">
+  <meta property="og:description" content="Dołącz do ekosystemu Noktra i zarejestruj się do airdropu tokenów">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://robert710aa.github.io/noktra-start-static/">
+  <meta property="og:image" content="logo.png">
+  <meta name="theme-color" content="#00ffcc">
+  <meta name="msapplication-TileColor" content="#00ffcc">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Noktra Airdrop</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=44&t=20241201">
+  <link rel="icon" type="image/png" href="logo.png">
 </head>
-<body>
-  <div class="top-link">
-    <a href="#nft-gallery">Gallery NFT Noktra</a>
-  </div>
+<body data-lang="pl" data-theme="dark">
+
+  <!-- Background Image -->
   <div class="background"></div>
-  <img src="logo.png" alt="Noktra Logo" class="corner-logo" />
-  <div id="nft-gallery" class="nft-gallery">
-    <h2>NFT Gallery</h2>
-    <div class="nft-items">
-      <div class="nft-card">
-        <img src="https://arweave.net/FK-p1idQ7L7JAWp0RmUWTzUXxAyMZ3J63X-0YQdCFEk" alt="NFT 1">
-        <p>Noktra Genesis #1</p>
-      </div>
-      <div class="nft-card">
-        <img src="https://arweave.net/gzH8e-VV2jwQ2x5DGVdHTrkqEYkYEdK99BbsYWeqPcg" alt="NFT 2">
-        <p>Noktra Genesis #2</p>
-      </div>
-    </div>
+
+  <!-- Corner Logo -->
+  <div class="corner-logo">
+    <img src="logo.png" alt="Noktra Logo" onerror="handleImageError(this)">
   </div>
+
+  <!-- Top navigation link to the NFT gallery -->
+  <div class="top-link">
+    <a href="#nft-gallery" data-en="Noktra NFT Gallery" data-pl="Galeria NFT Noktra">Galeria NFT Noktra</a>
+  </div>
+
+  <!-- Language switcher -->
   <div class="language-switcher">
-    <button onclick="setLanguage('en')">🇬🇧 English</button>
-    <button onclick="setLanguage('pl')">🇵🇱 Polski</button>
+    <button onclick="setLanguage('pl')" class="active">PL</button>
+    <button onclick="setLanguage('en')">EN</button>
   </div>
+
+  <!-- Main Container -->
   <div class="container">
-    <h1 data-en="Noktra Airdrop" data-pl="Airdrop Noktra">Noktra Airdrop</h1>
-    <p class="description" data-en="Noktra is a decentralized community token built on Solana. No inflation. No limits. For the people."
-       data-pl="Noktra to zdecentralizowany token społecznościowy zbudowany na Solanie. Bez dodruku. Bez barier. Dla ludzi.">
-       Noktra is a decentralized community token built on Solana. No inflation. No limits. For the people.
-    </p>
+    <h1 class="gradient-title" data-en="Noktra Airdrop" data-pl="Airdrop Noktra">Airdrop Noktra</h1>
+    
+    <!-- Mission text -->
+    <p class="description" data-en="Noktra is my personal dream, now becoming reality. Thank you for being a part of it. Born out of passion, faith, and the need to create something truly my own — Noktra is not a project, it's a feeling. It's the beginning of a journey that will take her to a place where the whole world will hear her name." data-pl="Noktra to moje osobiste marzenie, które staje się rzeczywistością. Dziękuję, że jesteś tego częścią. Zrodzona z pasji, wiary i potrzeby stworzenia czegoś naprawdę mojego — Noktra to nie projekt, to uczucie. To początek podróży, która zaprowadzi ją do miejsca, gdzie cały świat usłyszy jej imię.">Noktra to moje osobiste marzenie, które staje się rzeczywistością. Dziękuję, że jesteś tego częścią. Zrodzona z pasji, wiary i potrzeby stworzenia czegoś naprawdę mojego — Noktra to nie projekt, to uczucie. To początek podróży, która zaprowadzi ją do miejsca, gdzie cały świat usłyszy jej imię.</p>
+
     <div class="token-info">
       <p><strong data-en="Token" data-pl="Token">Token</strong>: NOK</p>
-      <p><strong data-en="Total Supply" data-pl="Podaż">Total Supply</strong>: 1,000,000,000</p>
-      <p><strong data-en="Network" data-pl="Sieć">Network</strong>: Solana</p>
-      <p><strong>Token Address:</strong> <a href="https://solscan.io/token/48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1TbL" target="_blank">Solscan</a></p>
+      <p><strong data-en="Total Supply" data-pl="Podaż">Podaż</strong>: 1,000,000,000</p>
+      <p><strong data-en="Network" data-pl="Sieć">Sieć</strong>: Solana</p>
+      <p><strong data-en="Token Address" data-pl="Adres tokenu">Adres tokenu</strong>: <a href="https://solscan.io/token/48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1bL" target="_blank" rel="noopener noreferrer">Solscan</a>
+      <button id="copy-token" class="copy-btn" type="button" data-address="48QzG8RhntaiPjY7z3mPqaDiK8Zr1bL" data-en="Copy" data-pl="Kopiuj">Kopiuj</button></p>
     </div>
-    <form id="airdrop-form">
-      <input type="text" id="address" placeholder="Solana Address" required />
-      <input type="text" id="twitter" placeholder="Twitter Username" required />
-      <input type="text" id="telegram" placeholder="Telegram Username" required />
-      <button type="submit" data-en="Submit to Airdrop" data-pl="Zgłoś się do airdropu">Submit to Airdrop</button>
+
+    <!-- Airdrop registration form -->
+    <form id="airdrop-form" novalidate>
+      <div class="form-group">
+        <label for="address" data-en="Solana Address" data-pl="Adres Solana">Adres Solana</label>
+        <input type="text" id="address" name="address" placeholder="Wprowadź swój adres Solana" data-en="Enter your Solana address" data-pl="Wprowadź swój adres Solana" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="twitter" data-en="Twitter Username" data-pl="Nazwa użytkownika Twitter">Nazwa użytkownika Twitter</label>
+        <input type="text" id="twitter" name="twitter" placeholder="Wprowadź swoją nazwę użytkownika Twitter" data-en="Enter your Twitter username" data-pl="Wprowadź swoją nazwę użytkownika Twitter" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="telegram" data-en="Telegram Username" data-pl="Nazwa użytkownika Telegram">Nazwa użytkownika Telegram</label>
+        <input type="text" id="telegram" name="telegram" placeholder="Wprowadź swoją nazwę użytkownika Telegram" data-en="Enter your Telegram username" data-pl="Wprowadź swoją nazwę użytkownika Telegram" required>
+      </div>
+      
+      <button type="submit" data-en="Submit to Airdrop" data-pl="Zgłoś się do airdropu">Zgłoś się do airdropu</button>
     </form>
-    <p id="message"></p>
+    
+    <div id="message"></div>
+
     <div class="socials">
-      <a href="https://phantom.app/" target="_blank">Phantom Wallet</a> |
-      <a href="#" target="_blank">Twitter</a> |
-      <a href="#" target="_blank">Telegram</a>
+      <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer" data-en="Phantom Wallet" data-pl="Portfel Phantom">👛 Portfel Phantom</a> |
+      <a href="https://x.com/Noktra1755" target="_blank" rel="noopener noreferrer" data-en="Twitter" data-pl="Twitter">🐦 Twitter</a> |
+      <a href="https://t.me/Noktra_AirDrop" target="_blank" rel="noopener noreferrer" data-en="Telegram" data-pl="Telegram">📱 Telegram</a>
     </div>
   </div>
-  <script src="script.js"></script>
+
+  <!-- NFT Gallery Section -->
+  <div id="nft-gallery" class="nft-gallery">
+    <h2 data-en="Noktra Genesis Collection" data-pl="Kolekcja Genesis Noktra">Kolekcja Genesis Noktra</h2>
+    <div class="nft-items">
+      <div class="nft-card" title="Token Noktra #1" data-en="Noktra Token #1" data-pl="Token Noktra #1">
+        <img src="889DE7F5-6899-4172-A704-6EC2F9E3114A.png" alt="Token Noktra 1" onerror="handleImageError(this)">
+        <p data-en="Noktra Token #1" data-pl="Token Noktra #1">Token Noktra #1</p>
+      </div>
+      <div class="nft-card" title="Token Noktra #2" data-en="Noktra Token #2" data-pl="Token Noktra #2">
+        <img src="D3897B39-FBCA-41A6-9BC2-C88AF6DD2B6B.png" alt="Token Noktra 2" onerror="handleImageError(this)">
+        <p data-en="Noktra Token #2" data-pl="Token Noktra #2">Token Noktra #2</p>
+      </div>
+      <div class="nft-card" title="Token Noktra #3" data-en="Noktra Token #3" data-pl="Token Noktra #3">
+        <img src="E7A36217-5496-4C3A-9439-87C9278E6F24.png" alt="Token Noktra 3" onerror="handleImageError(this)">
+        <p data-en="Token Noktra #3" data-pl="Token Noktra #3">Token Noktra #3</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="copy-notification" id="copyNotification">
+    <span data-en="Address copied!" data-pl="Adres skopiowany!">Adres skopiowany!</span>
+  </div>
+
+  <!-- Script handling language switching and form submission -->
+  <script src="script.js?v=43"></script>
 </body>
 </html>
 
