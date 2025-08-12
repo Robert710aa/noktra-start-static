@@ -210,3 +210,21 @@ button[type="submit"]:hover {
   padding: 0.5rem;
   font-size: 0.9rem;
 }
+/* Shrink airdrop form ~50% */
+#airdrop-form {
+  width: 50% !important;
+  max-width: 170px;
+  margin: 0 auto;
+  transform-origin: top center;
+}
+
+#airdrop-form input[type="text"] {
+  padding: 6px !important;
+  font-size: 0.85rem !important;
+  margin: 6px 0 !important;
+}
+
+#airdrop-form button[type="submit"] {
+  padding: 8px !important;
+  font-size: 0.9rem !important;
+}
