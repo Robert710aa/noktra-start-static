@@ -9,7 +9,7 @@ body, html {
   left: 0;
   width: 100%; box-sizing: border-box;
   height: 100%;
-  background: urlhttps://images.unsplash.com/photo-1462331940025-496dfbfc7564 no-repeat center center fixed;
+  background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa') no-repeat center center fixed;
   background-size: cover;
   z-index: -1;
 }
@@ -192,39 +192,4 @@ button[type="submit"]:hover {
 .nft-card:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px #00ffeeaa;
-}
-#airdrop-form {
-  width: 50%;
-  max-width: 180px;   /* zabezpieczenie na desktop */
-  margin: 0 auto;
-}
-
-#airdrop-form .form-group { margin-bottom: 0.5rem; }
-
-#airdrop-form input {
-  padding: 0.35rem;
-  font-size: 0.9rem;
-}
-
-#airdrop-form button {
-  padding: 0.5rem;
-  font-size: 0.9rem;
-}
-/* Shrink airdrop form ~50% */
-#airdrop-form {
-  width: 50% !important;
-  max-width: 170px;
-  margin: 0 auto;
-  transform-origin: top center;
-}
-
-#airdrop-form input[type="text"] {
-  padding: 6px !important;
-  font-size: 0.85rem !important;
-  margin: 6px 0 !important;
-}
-
-#airdrop-form button[type="submit"] {
-  padding: 8px !important;
-  font-size: 0.9rem !important;
 }
