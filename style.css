@@ -193,4 +193,20 @@ button[type="submit"]:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px #00ffeeaa;
 }
+#airdrop-form {
+  width: 50%;
+  max-width: 180px;   /* zabezpieczenie na desktop */
+  margin: 0 auto;
+}
 
+#airdrop-form .form-group { margin-bottom: 0.5rem; }
+
+#airdrop-form input {
+  padding: 0.35rem;
+  font-size: 0.9rem;
+}
+
+#airdrop-form button {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
