@@ -5,6 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Noktra Airdrop</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    #address{
+      background-image:url('https://arweave.net/FK-p1idQ7L7JAWp0RmUWTzUXxAyMZ3J63X-0YQdCFEk');
+      background-repeat:no-repeat;
+      background-size:20px 20px;
+      background-position:8px center;
+      padding-left:36px;
+    }
+    #twitter{
+      background-image:url('https://arweave.net/gzH8e-VV2jwQ2x5DGVdHTrkqEYkYEdK99BbsYWeqPcg');
+      background-repeat:no-repeat;
+      background-size:20px 20px;
+      background-position:8px center;
+      padding-left:36px;
+    }
+    #telegram{
+      background-image:url('889DE7F5-6899-4172-A704-6EC2F9E3114A.png');
+      background-repeat:no-repeat;
+      background-size:20px 20px;
+      background-position:8px center;
+      padding-left:36px;
+    }
+  </style>
   <script>window.NOKTRA_BACKEND_URL="https://noktra-airdrop-6r387ygq6-noktras-projects.vercel.app/api";</script>
 </head>
 <body>
@@ -73,7 +96,6 @@
 
   <script src="script.js"></script>
 
-  <!-- Minimalny licznik: backend (global) + fallback lokalny -->
   <script>
     (function(){
       const backend = (typeof window!=='undefined' && window.NOKTRA_BACKEND_URL) ? String(window.NOKTRA_BACKEND_URL) : '';
@@ -138,7 +160,6 @@
             }
           }catch(_){}
 
-          // fallback lokalny
           submitted[addr] = { tw, tg, ts: Date.now() }; saveSubmitted(submitted);
           setLocalCount(getLocalCount()+1); renderCount(); f.reset(); setMsg('Zgłoszenie przyjęte (lokalnie).', false);
         });
