@@ -6,10 +6,17 @@
   <title>Noktra Airdrop</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://plausible.io">
+  <link rel="preload" as="image" href="logo.png">
+  <link rel="preload" as="image" href="D3897B39-FBCA-41A6-9BC2-C88AF6DD2B6B.png">
+  <link rel="preload" as="image" href="E7A36217-5496-4C3A-9439-87C9278E6F24.png">
+  <link rel="preload" as="image" href="889DE7F5-6899-4172-A704-6EC2F9E3114A.png">
   <meta property="og:title" content="Noktra Airdrop">
   <meta property="og:description" content="Noktra — zdecentralizowany token społecznościowy na Solanie.">
   <meta property="og:image" content="logo.png">
+  <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Noktra1755">
   <style>
     .linklike{background:none;border:none;color:#00ffcc;cursor:pointer;text-decoration:underline;padding:0;margin-left:8px;font:inherit}
     #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:rgba(0,0,0,.75);color:#fff;padding:8px 12px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s;font-size:.9rem;z-index:99999}
@@ -27,8 +34,7 @@
     .neon-ornament svg{height:18px;filter:drop-shadow(0 0 8px rgba(0,255,204,.5))}
     .neon-ornament path{stroke:url(#grad-neon);stroke-width:3;fill:none;stroke-linecap:round;opacity:.9;stroke-dasharray:180;animation:dash 12s linear infinite}
     @keyframes dash{to{stroke-dashoffset:-360}}
-
-    /* Splash startowy: logo full-screen + fade+blur */
+    /* Splash: logo full screen + fade/blur */
     body.splash-lock{overflow:hidden}
     .splash{
       position:fixed; inset:0; z-index:100000; display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -43,9 +49,7 @@
       transition:transform .6s ease, filter .6s ease, opacity .6s ease;
     }
     .splash.play .mark{animation:logoFade 1.4s ease .4s forwards}
-    @keyframes logoFade{
-      to{opacity:0; filter:blur(18px) brightness(1.15); transform:scale(1.06)}
-    }
+    @keyframes logoFade{to{opacity:0; filter:blur(18px) brightness(1.15); transform:scale(1.06)}}
     .splash .title{
       margin-top:10px;
       font-size:clamp(18px,3.6vw,28px); color:#00ffcc; letter-spacing:1.2px; font-weight:700; text-align:center;
@@ -54,20 +58,21 @@
     }
   </style>
   <script>window.NOKTRA_BACKEND_URL="https://noktra-airdrop-6r387ygq6-noktras-projects.vercel.app/api";</script>
+  <script>
+    (function(){var s=document.createElement('script');s.src='https://plausible.io/js/script.js';s.defer=true;s.setAttribute('data-domain',location.hostname);document.head.appendChild(s);})();
+  </script>
 </head>
 <body>
   <div class="top-link">
     <a href="#nft-gallery">Gallery NFT Noktra</a>
   </div>
   <div class="background"></div>
-  <img src="logo.png" alt="Noktra Logo" class="corner-logo" />
+  <img src="logo.png" alt="Noktra Logo" class="corner-logo" decoding="async" />
 
-  <!-- Splash: logo full-screen + komunikat EN -->
+  <!-- Splash -->
   <div id="splash" class="splash" aria-hidden="true">
     <img class="mark" src="logo.png" alt="">
-    <div class="title" data-pl="NOKTRA THANKS YOU FOR BEING PART OF THE PROJECT" data-en="NOKTRA THANKS YOU FOR BEING PART OF THE PROJECT">
-      NOKTRA THANKS YOU FOR BEING PART OF THE PROJECT
-    </div>
+    <div class="title">NOKTRA THANKS YOU FOR BEING PART OF THE PROJECT</div>
   </div>
 
   <div id="nft-gallery" class="nft-gallery">
@@ -86,15 +91,15 @@
     </div>
     <div class="nft-items">
       <div class="nft-card">
-        <img src="D3897B39-FBCA-41A6-9BC2-C88AF6DD2B6B.png" alt="NFT 1">
+        <img src="D3897B39-FBCA-41A6-9BC2-C88AF6DD2B6B.png" alt="NFT 1" loading="lazy" decoding="async">
         <p>Noktra Genesis #1</p>
       </div>
       <div class="nft-card">
-        <img src="E7A36217-5496-4C3A-9439-87C9278E6F24.png" alt="NFT 2">
+        <img src="E7A36217-5496-4C3A-9439-87C9278E6F24.png" alt="NFT 2" loading="lazy" decoding="async">
         <p>Noktra Genesis #2</p>
       </div>
       <div class="nft-card">
-        <img src="889DE7F5-6899-4172-A704-6EC2F9E3114A.png" alt="NFT 3">
+        <img src="889DE7F5-6899-4172-A704-6EC2F9E3114A.png" alt="NFT 3" loading="lazy" decoding="async">
         <p>Noktra Genesis #3</p>
       </div>
     </div>
@@ -132,13 +137,18 @@
 
     <p id="counter" style="text-align:center; font-weight:bold; margin-top:0.5rem; color:#00ffcc;">Zgłoszeń: 0</p>
 
-    <form id="airdrop-form">
-      <input type="text" id="address" placeholder="Solana Address" required />
-      <input type="text" id="twitter" placeholder="Twitter Username" required />
-      <input type="text" id="telegram" placeholder="Telegram Username" required />
+    <form id="airdrop-form" autocomplete="off">
+      <input type="text" id="address" placeholder="Solana Address" required
+             inputmode="text" minlength="32" maxlength="60"
+             pattern="[1-9A-HJ-NP-Za-km-z]{32,60}"
+             title="Wklej poprawny adres Solana (base58, 32–60 znaków)" />
+      <input type="text" id="twitter" placeholder="Twitter Username" required
+             inputmode="text" maxlength="32" title="@username bez spacji" />
+      <input type="text" id="telegram" placeholder="Telegram Username" required
+             inputmode="text" maxlength="32" title="@username bez spacji" />
       <button type="submit" data-en="Submit to Airdrop" data-pl="Zgłoś się do airdropu">Submit to Airdrop</button>
     </form>
-    <p id="message"></p>
+    <p id="message" aria-live="polite"></p>
     <div class="socials">
       <a href="https://phantom.app/" target="_blank" rel="noopener">Phantom Wallet</a> |
       <a href="https://x.com/Noktra1755" target="_blank" rel="noopener">Twitter</a> |
@@ -146,7 +156,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 
   <script>
     (function(){
@@ -316,17 +326,17 @@
 
   <script>
     (function(){
-      // Splash: odtwórz animację (fade+blur) i usuń warstwę
+      // Splash fade/blur out
       document.addEventListener('DOMContentLoaded', function(){
         var splash=document.getElementById('splash');
         if(!splash) return;
         document.body.classList.add('splash-lock');
-        splash.classList.add('play'); // startuje animację logo
+        splash.classList.add('play');
         setTimeout(function(){
-          splash.classList.add('hide');           // wygaszanie tła splash
+          splash.classList.add('hide');
           document.body.classList.remove('splash-lock');
           setTimeout(function(){ splash.remove(); }, 800);
-        }, 1800); // ile splash na ekranie (ms)
+        }, 1800);
       });
     })();
   </script>
