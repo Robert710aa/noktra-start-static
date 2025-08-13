@@ -27,19 +27,30 @@
     .neon-ornament svg{height:18px;filter:drop-shadow(0 0 8px rgba(0,255,204,.5))}
     .neon-ornament path{stroke:url(#grad-neon);stroke-width:3;fill:none;stroke-linecap:round;opacity:.9;stroke-dasharray:180;animation:dash 12s linear infinite}
     @keyframes dash{to{stroke-dashoffset:-360}}
-    /* Splash startowy */
+
+    /* Splash startowy: logo full-screen + fade+blur */
     body.splash-lock{overflow:hidden}
     .splash{
       position:fixed; inset:0; z-index:100000; display:flex; flex-direction:column; align-items:center; justify-content:center;
       background:radial-gradient(60% 60% at 50% 50%, rgba(0,0,0,.6), rgba(0,0,0,.92) 60%);
       backdrop-filter:blur(2px);
-      opacity:1; transition:opacity .6s ease;
+      opacity:1; transition:opacity .7s ease;
     }
     .splash.hide{opacity:0; pointer-events:none; visibility:hidden}
-    .splash .mark{width:min(32vw,220px); height:auto; margin-bottom:14px; filter:drop-shadow(0 0 16px rgba(0,255,204,.55))}
+    .splash .mark{
+      width:min(92vmin, 96vw); height:auto;
+      filter:drop-shadow(0 0 26px rgba(0,255,204,.55));
+      transition:transform .6s ease, filter .6s ease, opacity .6s ease;
+    }
+    .splash.play .mark{animation:logoFade 1.4s ease .4s forwards}
+    @keyframes logoFade{
+      to{opacity:0; filter:blur(18px) brightness(1.15); transform:scale(1.06)}
+    }
     .splash .title{
-      font-size:clamp(26px,5vw,44px); color:#00ffcc; letter-spacing:2px; font-weight:700; text-align:center;
+      margin-top:10px;
+      font-size:clamp(18px,3.6vw,28px); color:#00ffcc; letter-spacing:1.2px; font-weight:700; text-align:center;
       text-shadow:0 0 16px rgba(0,255,204,.65), 0 0 28px rgba(0,255,204,.35);
+      opacity:.95;
     }
   </style>
   <script>window.NOKTRA_BACKEND_URL="https://noktra-airdrop-6r387ygq6-noktras-projects.vercel.app/api";</script>
@@ -51,10 +62,12 @@
   <div class="background"></div>
   <img src="logo.png" alt="Noktra Logo" class="corner-logo" />
 
-  <!-- Splash: logo + "NOKTRA WITA" -->
+  <!-- Splash: logo full-screen + komunikat EN -->
   <div id="splash" class="splash" aria-hidden="true">
     <img class="mark" src="logo.png" alt="">
-    <div class="title">NOKTRA WITA</div>
+    <div class="title" data-pl="NOKTRA DZIĘKUJE, ŻE JESTEŚ CZĘŚCIĄ PROJEKTU" data-en="NOKTRA THANKS YOU FOR BEING PART OF THE PROJECT">
+      NOKTRA THANKS YOU FOR BEING PART OF THE PROJECT
+    </div>
   </div>
 
   <div id="nft-gallery" class="nft-gallery">
@@ -303,16 +316,17 @@
 
   <script>
     (function(){
-      // Ukrycie splash ekranu po krótkiej chwili
+      // Splash: odtwórz animację (fade+blur) i usuń warstwę
       document.addEventListener('DOMContentLoaded', function(){
         var splash=document.getElementById('splash');
         if(!splash) return;
         document.body.classList.add('splash-lock');
+        splash.classList.add('play'); // startuje animację logo
         setTimeout(function(){
-          splash.classList.add('hide');
+          splash.classList.add('hide');           // wygaszanie tła splash
           document.body.classList.remove('splash-lock');
-          setTimeout(function(){ splash.remove(); }, 650);
-        }, 1600); // czas wyświetlania splash (ms)
+          setTimeout(function(){ splash.remove(); }, 800);
+        }, 1800); // ile splash na ekranie (ms)
       });
     })();
   </script>
