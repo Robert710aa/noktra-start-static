@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +13,7 @@
   </div>
   <div class="background"></div>
   <img src="logo.png" alt="Noktra Logo" class="corner-logo" />
+
   <div id="nft-gallery" class="nft-gallery">
     <h2>NFT Gallery</h2>
     <div class="nft-items">
@@ -25,12 +25,18 @@
         <img src="https://arweave.net/gzH8e-VV2jwQ2x5DGVdHTrkqEYkYEdK99BbsYWeqPcg" alt="NFT 2">
         <p>Noktra Genesis #2</p>
       </div>
+      <div class="nft-card">
+        <img src="889DE7F5-6899-4172-A704-6EC2F9E3114A.png" alt="NFT 3">
+        <p>Noktra Genesis #3</p>
+      </div>
     </div>
   </div>
+
   <div class="language-switcher">
     <button onclick="setLanguage('en')">🇬🇧 English</button>
     <button onclick="setLanguage('pl')">🇵🇱 Polski</button>
   </div>
+
   <div class="container">
     <h1 data-en="Noktra Airdrop" data-pl="Airdrop Noktra">Noktra Airdrop</h1>
     <p class="description" data-en="Noktra is a decentralized community token built on Solana. No inflation. No limits. For the people."
@@ -44,7 +50,6 @@
       <p><strong>Token Address:</strong> <a href="https://solscan.io/token/48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1TbL" target="_blank">Solscan</a></p>
     </div>
 
-    
     <p id="counter" style="text-align:center; font-weight:bold; margin-top:0.5rem; color:#00ffcc;">Zgłoszeń: 0</p>
 
     <form id="airdrop-form">
@@ -78,3 +83,62 @@
         var n = (typeof v==='number') ? v : getLocalCount();
         el.textContent = 'Zgłoszeń: ' + n;
       }
+      async function fetchGlobal(){
+        if(!backend) return;
+        try{
+          const r = await fetch(backend.replace(/\/$/,'') + '/count');
+          if(!r.ok) return;
+          const d = await r.json();
+          if(typeof d.count === 'number'){ setLocalCount(d.count); renderCount(d.count); }
+        }catch(_){}
+      }
+      function isValidAddr(a){ return !!a && a.length>=32 && a.length<=60 && /^[1-9A-HJ-NP-Za-km-z]+$/.test(a); }
+      function getSubmitted(){ try{ return JSON.parse(localStorage.getItem(keySub)||'{}'); }catch{return {}} }
+      function saveSubmitted(m){ localStorage.setItem(keySub, JSON.stringify(m)); }
+      function setMsg(t,err){ var m=document.getElementById('message'); if(!m) return; m.textContent=t; m.style.color=err?'#ff6b6b':'#00ff88'; }
+
+      document.addEventListener('DOMContentLoaded', function(){
+        renderCount();
+        fetchGlobal();
+
+        var f = document.getElementById('airdrop-form');
+        if(!f) return;
+
+        f.addEventListener('submit', async function(e){
+          e.preventDefault();
+          var addr = document.getElementById('address')?.value.trim();
+          var tw = document.getElementById('twitter')?.value.trim();
+          var tg = document.getElementById('telegram')?.value.trim();
+
+          if(!isValidAddr(addr)) return setMsg('Nieprawidłowy adres Solana.', true);
+          if(!tw || !tg) return setMsg('Uzupełnij Twitter oraz Telegram.', true);
+
+          var submitted = getSubmitted();
+          if(submitted[addr]) return setMsg('Ten adres już złożył zgłoszenie.', true);
+
+          try{
+            if(backend){
+              const r = await fetch(backend.replace(/\/$/,'') + '/submit', {
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({ address: addr, twitter: tw, telegram: tg })
+              });
+              if(r.ok){
+                const d = await r.json();
+                if(d?.ok && typeof d.count==='number'){
+                  submitted[addr] = { tw, tg, ts: Date.now() }; saveSubmitted(submitted);
+                  setLocalCount(d.count); renderCount(d.count); f.reset(); return setMsg('Zgłoszenie przyjęte. Dziękujemy!', false);
+                }
+                if(d?.error==='duplicate') return setMsg('Ten adres już złożył zgłoszenie.', true);
+              }
+            }
+          }catch(_){}
+
+          // fallback lokalny
+          submitted[addr] = { tw, tg, ts: Date.now() }; saveSubmitted(submitted);
+          setLocalCount(getLocalCount()+1); renderCount(); f.reset(); setMsg('Zgłoszenie przyjęte (lokalnie).', false);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
