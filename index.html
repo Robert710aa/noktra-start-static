@@ -16,6 +16,13 @@
     #toast.show{opacity:1}
     .lightbox-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999}
     .lightbox-backdrop img{max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 0 20px rgba(0,0,0,.6)}
+    html{scroll-behavior:smooth}
+    .nft-card{transition:transform .25s ease, box-shadow .25s ease}
+    .nft-card:hover{transform:translateY(-4px) scale(1.02); box-shadow:0 0 24px rgba(0,255,204,.35)}
+    .reveal{opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.visible{opacity:1; transform:none}
+    .share-row{margin-top:10px; text-align:center}
+    .share-row a{color:#00ffcc; margin:0 8px; text-decoration:underline}
   </style>
   <script>window.NOKTRA_BACKEND_URL="https://noktra-airdrop-6r387ygq6-noktras-projects.vercel.app/api";</script>
 </head>
@@ -47,6 +54,10 @@
        data-pl="Noktra is my own project, a dream I'm realizing. Thank you for being a part of it. The token was born out of passion, faith, and the desire to create something of my own. Noktra isn't just a project—it's a feeling. Noktra will continue to grow—until the whole world hears about it.">
        Noktra is my own project, a dream I'm realizing. Thank you for being a part of it. The token was born out of passion, faith, and the desire to create something of my own. Noktra isn't just a project—it's a feeling. Noktra will continue to grow—until the whole world hears about it.
     </p>
+    <div class="share-row">
+      <a id="share-twitter" href="#" target="_blank" rel="noopener">Udostępnij na Twitter</a>
+      <a id="share-telegram" href="#" target="_blank" rel="noopener">Udostępnij na Telegram</a>
+    </div>
   </div>
 
   <div class="language-switcher">
@@ -188,6 +199,72 @@
       }, false);
     })();
   </script>
+
+  <script>
+    (function(){
+      // Reveal animacje
+      document.addEventListener('DOMContentLoaded', function(){
+        document.querySelectorAll('.nft-card, .container').forEach(el=>el.classList.add('reveal'));
+        const io=new IntersectionObserver((entries)=>{
+          entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+        },{threshold:.15});
+        document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+      });
+
+      // Confetti po sukcesie
+      function confettiBurst(){
+        const canvas=document.createElement('canvas');
+        Object.assign(canvas.style,{position:'fixed',inset:'0',pointerEvents:'none',zIndex:99998});
+        document.body.appendChild(canvas);
+        const ctx=canvas.getContext('2d');
+        const resize=()=>{canvas.width=innerWidth; canvas.height=innerHeight;};
+        resize(); addEventListener('resize',resize,{once:true});
+        const colors=['#00ffcc','#00e6b8','#ffffff','#99ffee','#66ffd9'];
+        const parts=Array.from({length:80}).map(()=>({
+          x:Math.random()*canvas.width,
+          y:-20-Math.random()*40,
+          r:3+Math.random()*4,
+          c:colors[Math.floor(Math.random()*colors.length)],
+          vy:2+Math.random()*3,
+          vx:(Math.random()-.5)*2,
+          g:.05+.02*Math.random(),
+          a:1
+        }));
+        let t=0; const maxT=90;
+        (function loop(){
+          ctx.clearRect(0,0,canvas.width,canvas.height);
+          parts.forEach(p=>{
+            p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.a-=.008;
+            ctx.globalAlpha=Math.max(p.a,0);
+            ctx.fillStyle=p.c;
+            ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+          });
+          t++; if(t<maxT){ requestAnimationFrame(loop); } else { canvas.remove(); }
+        })();
+      }
+
+      // Nasłuchuj sukcesu
+      document.addEventListener('DOMContentLoaded', function(){
+        const msg=document.getElementById('message'); if(!msg) return;
+        const obs=new MutationObserver(()=>{
+          const text=(msg.textContent||'').toLowerCase();
+          if(text.includes('zgłoszenie przyjęte')){ confettiBurst(); }
+        });
+        obs.observe(msg,{childList:true, characterData:true, subtree:true});
+      });
+
+      // Linki udostępnienia z aktualnym URL
+      document.addEventListener('DOMContentLoaded', function(){
+        const url=encodeURIComponent(location.href);
+        const txt=encodeURIComponent('Noktra Genesis on Solana — join the airdrop!');
+        const tw=document.getElementById('share-twitter');
+        const tg=document.getElementById('share-telegram');
+        if(tw) tw.href=`https://twitter.com/intent/tweet?text=${txt}&url=${url}`;
+        if(tg) tg.href=`https://t.me/share/url?url=${url}&text=${txt}`;
+      });
+    })();
+  </script>
+
   <div id="toast"></div>
 </body>
 </html>
