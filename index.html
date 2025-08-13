@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Noktra Airdrop</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="logo.png">
+  <meta property="og:title" content="Noktra Airdrop">
+  <meta property="og:description" content="Noktra — zdecentralizowany token społecznościowy na Solanie.">
+  <meta property="og:image" content="logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    .linklike{background:none;border:none;color:#00ffcc;cursor:pointer;text-decoration:underline;padding:0;margin-left:8px;font:inherit}
+    #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:rgba(0,0,0,.75);color:#fff;padding:8px 12px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s;font-size:.9rem;z-index:99999}
+    #toast.show{opacity:1}
+    .lightbox-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999}
+    .lightbox-backdrop img{max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 0 20px rgba(0,0,0,.6)}
+  </style>
   <script>window.NOKTRA_BACKEND_URL="https://noktra-airdrop-6r387ygq6-noktras-projects.vercel.app/api";</script>
 </head>
 <body>
@@ -52,7 +64,10 @@
       <p><strong data-en="Token" data-pl="Token">Token</strong>: NOK</p>
       <p><strong data-en="Total Supply" data-pl="Podaż">Total Supply</strong>: 1,000,000,000</p>
       <p><strong data-en="Network" data-pl="Sieć">Network</strong>: Solana</p>
-      <p><strong>Token Address:</strong> <a href="https://solscan.io/token/48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1TbL" target="_blank">Solscan</a></p>
+      <p><strong>Token Address:</strong>
+        <a href="https://solscan.io/token/48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1TbL" target="_blank" rel="noopener" id="token-solscan">Solscan</a>
+        <button type="button" id="copy-token" class="linklike" data-addr="48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1TbL">Kopiuj</button>
+      </p>
     </div>
 
     <p id="counter" style="text-align:center; font-weight:bold; margin-top:0.5rem; color:#00ffcc;">Zgłoszeń: 0</p>
@@ -143,5 +158,36 @@
       });
     })();
   </script>
+
+  <script>
+    (function(){
+      const btn=document.getElementById('copy-token'); if(!btn) return;
+      btn.addEventListener('click', async ()=>{
+        try{ await navigator.clipboard.writeText(btn.dataset.addr); showToast('Skopiowano adres tokena'); }
+        catch(_){ showToast('Nie udało się skopiować'); }
+      });
+      function showToast(t){
+        let el=document.getElementById('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; document.body.appendChild(el); }
+        el.textContent=t; el.className='show'; setTimeout(()=>{ el.className=''; },1800);
+      }
+    })();
+  </script>
+
+  <script>
+    (function(){
+      document.addEventListener('click', function(e){
+        const img=e.target.closest('.nft-card img'); if(!img) return;
+        e.preventDefault();
+        const src=img.getAttribute('src');
+        const wrap=document.createElement('div');
+        wrap.className='lightbox-backdrop';
+        wrap.innerHTML='<img src="'+src+'" alt="">';
+        wrap.addEventListener('click',()=>wrap.remove());
+        document.addEventListener('keydown',function esc(ev){ if(ev.key==='Escape'){ wrap.remove(); } },{once:true});
+        document.body.appendChild(wrap);
+      }, false);
+    })();
+  </script>
+  <div id="toast"></div>
 </body>
 </html>
