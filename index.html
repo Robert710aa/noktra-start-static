@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Noktra Airdrop</title>
   <link rel="stylesheet" href="style.css" />
+  <script>window.NOKTRA_BACKEND_URL="https://noktra-airdrop-6r387ygq6-noktras-projects.vercel.app/api";</script>
 </head>
 <body>
   <div class="top-link">
@@ -42,8 +43,11 @@
       <p><strong data-en="Network" data-pl="Sieć">Network</strong>: Solana</p>
       <p><strong>Token Address:</strong> <a href="https://solscan.io/token/48QzG8RhntaiPjY7z3mPqaDiK8TxDKetBKAKMZr1TbL" target="_blank">Solscan</a></p>
     </div>
-    <p id="counter" style="text-align:center; font-weight:bold; margin-top:1rem; color:#00ffcc;"></p>
-<form id="airdrop-form">
+
+    <p style="text-align:center; margin:6px 0; color:#eee;">Zasady: 1 adres = 1 zgłoszenie</p>
+    <p id="counter" style="text-align:center; font-weight:bold; margin-top:0.5rem; color:#00ffcc;">Zgłoszeń: 0</p>
+
+    <form id="airdrop-form">
       <input type="text" id="address" placeholder="Solana Address" required />
       <input type="text" id="twitter" placeholder="Twitter Username" required />
       <input type="text" id="telegram" placeholder="Telegram Username" required />
@@ -56,6 +60,21 @@
       <a href="#" target="_blank">Telegram</a>
     </div>
   </div>
+
   <script src="script.js"></script>
-</body>
-</html>
+
+  <!-- Minimalny licznik: backend (global) + fallback lokalny -->
+  <script>
+    (function(){
+      const backend = (typeof window!=='undefined' && window.NOKTRA_BACKEND_URL) ? String(window.NOKTRA_BACKEND_URL) : '';
+      const keyCount = 'noktra-airdrop-count';
+      const keySub = 'noktra-airdrop-submissions';
+
+      function getLocalCount(){ return parseInt(localStorage.getItem(keyCount) || '0', 10); }
+      function setLocalCount(v){ localStorage.setItem(keyCount, String(v)); }
+      function renderCount(v){
+        var el = document.getElementById('counter');
+        if(!el) return;
+        var n = (typeof v==='number') ? v : getLocalCount();
+        el.textContent = 'Zgłoszeń: ' + n;
+      }
