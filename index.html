@@ -27,6 +27,18 @@
       background-position:8px center;
       padding-left:36px;
     }
+    /* Logo w rogach kart NFT (overlay) */
+    .nft-card{ position:relative; }
+    .nft-card .nft-logo{
+      position:absolute;
+      top:8px;
+      right:8px;
+      width:36px;
+      height:36px;
+      border-radius:6px;
+      box-shadow:0 0 6px rgba(0,0,0,.4);
+      object-fit:cover;
+    }
   </style>
   <script>window.NOKTRA_BACKEND_URL="https://noktra-airdrop-6r387ygq6-noktras-projects.vercel.app/api";</script>
 </head>
@@ -42,14 +54,17 @@
     <div class="nft-items">
       <div class="nft-card">
         <img src="https://arweave.net/FK-p1idQ7L7JAWp0RmUWTzUXxAyMZ3J63X-0YQdCFEk" alt="NFT 1">
+        <img class="nft-logo" src="logo.png" alt="NFT logo">
         <p>Noktra Genesis #1</p>
       </div>
       <div class="nft-card">
         <img src="https://arweave.net/gzH8e-VV2jwQ2x5DGVdHTrkqEYkYEdK99BbsYWeqPcg" alt="NFT 2">
+        <img class="nft-logo" src="logo.png" alt="NFT logo">
         <p>Noktra Genesis #2</p>
       </div>
       <div class="nft-card">
         <img src="889DE7F5-6899-4172-A704-6EC2F9E3114A.png" alt="NFT 3">
+        <img class="nft-logo" src="logo.png" alt="NFT logo">
         <p>Noktra Genesis #3</p>
       </div>
     </div>
