@@ -956,6 +956,10 @@ body[data-lang="en"] .nft-strip .nft-card[data-en]::after {
 }
 
 @media (max-width: 480px) {
+  /* Improve small phone ergonomics and avoid iOS zoom */
+  .container { margin: 56px auto; padding: 0.9rem; }
+  .form-group input { font-size: 16px; padding: 10px 12px; }
+  .btn-primary, .airdrop-form button[type="submit"] { padding: 10px 14px; font-size: 14px; }
   .gradient-title {
     font-size: 2rem;
   }
@@ -969,8 +973,8 @@ body[data-lang="en"] .nft-strip .nft-card[data-en]::after {
   }
   
   .nft-card img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
   }
   
   .socials a {

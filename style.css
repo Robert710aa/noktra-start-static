@@ -154,6 +154,8 @@ button[type="submit"]:hover {
   }
   .nft-card {
     width: 90%;
+    max-width: 320px;
+    margin: 0 auto;
   }
   .corner-logo {
     width: 50px;
@@ -164,6 +166,46 @@ button[type="submit"]:hover {
   }
   .language-switcher button {
     font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+/* Phones (improved spacing, tap targets, prevent iOS zoom) */
+@media (max-width: 480px) {
+  .container {
+    margin: 3rem 0.75rem;
+    padding: 0.875rem;
+  }
+  .description {
+    font-size: 0.95rem;
+  }
+  .nft-card {
+    width: 100%;
+    padding: 0.75rem;
+  }
+  .nft-card img {
+    width: 100%;
+    height: auto;
+    max-width: 280px;
+    display: block;
+    margin: 0 auto;
+  }
+  input {
+    font-size: 16px; /* iOS: avoid zoom on focus */
+    padding: 0.6rem;
+  }
+  button[type="submit"] {
+    padding: 0.65rem;
+  }
+  .top-link {
+    top: 0.5rem;
+  }
+  .top-link a {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+  .language-switcher button {
+    font-size: 0.75rem;
     padding: 0.2rem 0.5rem;
   }
 }
