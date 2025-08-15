@@ -35,6 +35,7 @@
     .neon-ornament svg{height:18px;filter:drop-shadow(0 0 8px rgba(0,255,204,.5))}
     .neon-ornament path{stroke:url(#grad-neon);stroke-width:3;fill:none;stroke-linecap:round;opacity:.9;stroke-dasharray:180;animation:dash 12s linear infinite}
     @keyframes dash{to{stroke-dashoffset:-360}}
+
     /* Splash: logo full screen + fade/blur */
     body.splash-lock{overflow:hidden}
     .splash{
@@ -57,6 +58,33 @@
       text-shadow:0 0 16px rgba(0,255,204,.65), 0 0 28px rgba(0,255,204,.35);
       opacity:.95;
     }
+
+    /* Orby neonowe pod tłem + subtelne efekty */
+    .background{z-index:-2}
+    .fx-orbs{
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background:
+        radial-gradient(600px 600px at var(--x1,18%) var(--y1,28%), rgba(0,255,204,.12), transparent 60%),
+        radial-gradient(520px 520px at var(--x2,78%) var(--y2,72%), rgba(0,200,255,.10), transparent 60%),
+        radial-gradient(420px 420px at var(--x3,60%) var(--y3,18%), rgba(255,255,255,.06), transparent 55%);
+      filter:blur(10px) saturate(120%);
+      animation:orbsMove 22s linear infinite;
+    }
+    @keyframes orbsMove{
+      0%{--x1:18%;--y1:28%;--x2:78%;--y2:72%;--x3:60%;--y3:18%}
+      50%{--x1:30%;--y1:70%;--x2:70%;--y2:30%;--x3:80%;--y3:60%}
+      100%{--x1:18%;--y1:28%;--x2:78%;--y2:72%;--x3:60%;--y3:18%}
+    }
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(0,255,204,.40)}50%{box-shadow:0 0 28px rgba(0,255,204,.60)}}
+    .container{animation:pulseGlow 6s ease-in-out infinite}
+    .nft-card{position:relative; overflow:hidden}
+    .nft-card::after{
+      content:""; position:absolute; inset:-20%;
+      background:linear-gradient(75deg,transparent 0%,rgba(255,255,255,.12) 45%,rgba(255,255,255,.55) 50%,rgba(255,255,255,.12) 55%,transparent 100%);
+      transform:translateX(-130%) skewX(-12deg); pointer-events:none;
+    }
+    .nft-card:hover::after{animation:glint 1.2s ease}
+    @keyframes glint{to{transform:translateX(130%) skewX(-12deg)}}
   </style>
   <script>window.NOKTRA_BACKEND_URL="https://noktra-airdrop-6r387ygq6-noktras-projects.vercel.app/api";</script>
   <script>
@@ -68,6 +96,7 @@
     <a href="#nft-gallery">Gallery NFT Noktra</a>
   </div>
   <div class="background"></div>
+  <div class="fx-orbs" aria-hidden="true"></div>
   <img src="logo.png" alt="Noktra Logo" class="corner-logo" decoding="async" />
 
   <!-- Splash -->
@@ -144,9 +173,11 @@
              pattern="[1-9A-HJ-NP-Za-km-z]{32,60}"
              title="Wklej poprawny adres Solana (base58, 32–60 znaków)" />
       <input type="text" id="twitter" placeholder="Twitter Username" required
-             inputmode="text" maxlength="32" title="@username bez spacji" />
+             inputmode="text" maxlength="32" title="@username bez spacji"
+             autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" />
       <input type="text" id="telegram" placeholder="Telegram Username" required
-             inputmode="text" maxlength="32" title="@username bez spacji" />
+             inputmode="text" maxlength="32" title="@username bez spacji"
+             autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" />
       <button type="submit" data-en="Submit to Airdrop" data-pl="Zgłoś się do airdropu">Submit to Airdrop</button>
     </form>
     <p id="message" aria-live="polite"></p>
