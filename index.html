@@ -36,28 +36,31 @@
     .neon-ornament path{stroke:url(#grad-neon);stroke-width:3;fill:none;stroke-linecap:round;opacity:.9;stroke-dasharray:180;animation:dash 12s linear infinite}
     @keyframes dash{to{stroke-dashoffset:-360}}
 
-    /* Splash: logo full screen + fade/blur */
+    /* Splash: opóźnione logo, potem tekst i wygaszenie */
     body.splash-lock{overflow:hidden}
     .splash{
       position:fixed; inset:0; z-index:100000; display:flex; flex-direction:column; align-items:center; justify-content:center;
-      background:radial-gradient(60% 60% at 50% 50%, rgba(0,0,0,.6), rgba(0,0,0,.92) 60%);
+      background:radial-gradient(60% 60% at 50% 50%, rgba(0,0,0,.35), rgba(0,0,0,.85) 60%);
       backdrop-filter:blur(2px);
-      opacity:1; transition:opacity .7s ease;
+      opacity:0; transition:opacity .7s ease;
     }
+    .splash.show{opacity:1}
     .splash.hide{opacity:0; pointer-events:none; visibility:hidden}
     .splash .mark{
       width:min(92vmin, 96vw); height:auto;
       filter:drop-shadow(0 0 26px rgba(0,255,204,.55));
-      transition:transform .6s ease, filter .6s ease, opacity .6s ease;
+      opacity:0;
     }
-    .splash.play .mark{animation:logoFade 1.4s ease .4s forwards}
-    @keyframes logoFade{to{opacity:0; filter:blur(18px) brightness(1.15); transform:scale(1.06)}}
+    .splash.show .mark{animation:logoIn .8s ease forwards}
+    @keyframes logoIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
     .splash .title{
       margin-top:10px;
       font-size:clamp(18px,3.6vw,28px); color:#00ffcc; letter-spacing:1.2px; font-weight:700; text-align:center;
       text-shadow:0 0 16px rgba(0,255,204,.65), 0 0 28px rgba(0,255,204,.35);
-      opacity:.95;
+      opacity:0;
     }
+    .splash.show .title{animation:titleIn .8s ease .9s forwards}
+    @keyframes titleIn{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
 
     /* Orby neonowe pod tłem + subtelne efekty */
     .background{z-index:-2}
@@ -263,112 +266,18 @@
 
   <script>
     (function(){
-      const btn=document.getElementById('copy-token'); if(!btn) return;
-      btn.addEventListener('click', async ()=>{
-        try{ await navigator.clipboard.writeText(btn.dataset.addr); showToast('Skopiowano adres tokena'); }
-        catch(_){ showToast('Nie udało się skopiować'); }
-      });
-      function showToast(t){
-        let el=document.getElementById('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; document.body.appendChild(el); }
-        el.textContent=t; el.className='show'; setTimeout(()=>{ el.className=''; },1800);
-      }
-    })();
-  </script>
-
-  <script>
-    (function(){
-      document.addEventListener('click', function(e){
-        const img=e.target.closest('.nft-card img'); if(!img) return;
-        e.preventDefault();
-        const src=img.getAttribute('src');
-        const wrap=document.createElement('div');
-        wrap.className='lightbox-backdrop';
-        wrap.innerHTML='<img src="'+src+'" alt="">';
-        wrap.addEventListener('click',()=>wrap.remove());
-        document.addEventListener('keydown',function esc(ev){ if(ev.key==='Escape'){ wrap.remove(); } },{once:true});
-        document.body.appendChild(wrap);
-      }, false);
-    })();
-  </script>
-
-  <script>
-    (function(){
-      // Reveal animacje
+      // Splash: najpierw samo tło → logo → tekst → wygaszenie
       document.addEventListener('DOMContentLoaded', function(){
-        document.querySelectorAll('.nft-card, .container').forEach(el=>el.classList.add('reveal'));
-        const io=new IntersectionObserver((entries)=>{
-          entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-        },{threshold:.15});
-        document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-      });
-
-      // Confetti po sukcesie
-      function confettiBurst(){
-        const canvas=document.createElement('canvas');
-        Object.assign(canvas.style,{position:'fixed',inset:'0',pointerEvents:'none',zIndex:99998});
-        document.body.appendChild(canvas);
-        const ctx=canvas.getContext('2d');
-        const resize=()=>{canvas.width=innerWidth; canvas.height=innerHeight;};
-        resize(); addEventListener('resize',resize,{once:true});
-        const colors=['#00ffcc','#00e6b8','#ffffff','#99ffee','#66ffd9'];
-        const parts=Array.from({length:80}).map(()=>({
-          x:Math.random()*canvas.width,
-          y:-20-Math.random()*40,
-          r:3+Math.random()*4,
-          c:colors[Math.floor(Math.random()*colors.length)],
-          vy:2+Math.random()*3,
-          vx:(Math.random()-.5)*2,
-          g:.05+.02*Math.random(),
-          a:1
-        }));
-        let t=0; const maxT=90;
-        (function loop(){
-          ctx.clearRect(0,0,canvas.width,canvas.height);
-          parts.forEach(p=>{
-            p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.a-=.008;
-            ctx.globalAlpha=Math.max(p.a,0);
-            ctx.fillStyle=p.c;
-            ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-          });
-          t++; if(t<maxT){ requestAnimationFrame(loop); } else { canvas.remove(); }
-        })();
-      }
-
-      // Nasłuchuj sukcesu
-      document.addEventListener('DOMContentLoaded', function(){
-        const msg=document.getElementById('message'); if(!msg) return;
-        const obs=new MutationObserver(()=>{
-          const text=(msg.textContent||'').toLowerCase();
-          if(text.includes('zgłoszenie przyjęte')){ confettiBurst(); }
-        });
-        obs.observe(msg,{childList:true, characterData:true, subtree:true});
-      });
-
-      // Linki udostępnienia z aktualnym URL
-      document.addEventListener('DOMContentLoaded', function(){
-        const url=encodeURIComponent(location.href);
-        const txt=encodeURIComponent('Noktra Genesis on Solana — join the airdrop!');
-        const tw=document.getElementById('share-twitter');
-        const tg=document.getElementById('share-telegram');
-        if(tw) tw.href=`https://twitter.com/intent/tweet?text=${txt}&url=${url}`;
-        if(tg) tg.href=`https://t.me/share/url?url=${url}&text=${txt}`;
-      });
-    })();
-  </script>
-
-  <script>
-    (function(){
-      // Splash fade/blur out
-      document.addEventListener('DOMContentLoaded', function(){
-        var splash=document.getElementById('splash');
-        if(!splash) return;
-        document.body.classList.add('splash-lock');
-        splash.classList.add('play');
+        var splash=document.getElementById('splash'); if(!splash) return;
         setTimeout(function(){
-          splash.classList.add('hide');
-          document.body.classList.remove('splash-lock');
-          setTimeout(function(){ splash.remove(); }, 800);
-        }, 1800);
+          document.body.classList.add('splash-lock');
+          splash.classList.add('show');
+          setTimeout(function(){
+            splash.classList.add('hide');
+            document.body.classList.remove('splash-lock');
+            setTimeout(function(){ splash.remove(); }, 900);
+          }, 2800); // czas widoczności logo+tekstu
+        }, 700);     // opóźnienie startu
       });
     })();
   </script>
