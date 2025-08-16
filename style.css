@@ -244,3 +244,5 @@ button[type="submit"]:hover {
   #airdrop-form #address{grid-column:1/-1}
   #airdrop-form button[type="submit"]{grid-column:1/-1}
 }
+/* Nagłówek formularza na środku */
+.container h1{ text-align:center; margin:0 0 .75rem; }
